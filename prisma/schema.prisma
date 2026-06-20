@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  category    String
+  image       String
+  images      String
+  colors      String
+  sizes       String
+  fabric      String
+  featured    Boolean  @default(false)
+  reviewCount Int      @default(0)
+  rating      Float    @default(4.5)
+  stock       Int      @default(10)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  reviews     Review[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  name      String
+  rating    Int
+  comment   String
+  date      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id            String   @id @default(cuid())
+  customerName  String
+  phone         String
+  address       String
+  products      String
+  totalAmount   Float
+  paymentMethod String
+  paymentStatus String   @default("pending")
+  orderStatus   String   @default("new")
+  notes         String   @default("")
+  userId        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String   @default("Admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sessions  AdminSession[]
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String
+  email           String           @unique
+  password        String           @default("")
+  phone           String           @default("")
+  avatar          String           @default("")
+  googleId        String?        @unique
+  favorites       String           @default("[]")
+  emailVerified   Boolean          @default(false)
+  verifyToken     String           @default("")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  sessions        UserSession[]
+  passwordResets  PasswordReset[]
+  orders          Order[]
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminSession {
+  id          String   @id @default(cuid())
+  adminId     String
+  token       String   @unique
+  ipAddress   String   @default("")
+  userAgent   String   @default("")
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+  admin       Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdminNotification {
+  id        String   @id @default(cuid())
+  type      String
+  message   String
+  details   String   @default("")
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model PaymentMethod {
+  id        String   @id @default(cuid())
+  name      String
+  number    String
+  text      String   @default("")
+  link      String   @default("")
+  icon      String   @default("")
+  color     String   @default("")
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactMethod {
+  id        String   @id @default(cuid())
+  name      String
+  number    String
+  text      String   @default("")
+  link      String   @default("")
+  icon      String   @default("")
+  color     String   @default("")
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
