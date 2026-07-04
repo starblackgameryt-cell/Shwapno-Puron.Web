@@ -118,7 +118,7 @@ export async function POST(request: Request) {
     const gmailUrl = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`
 
     // Build WhatsApp URL
-    const whatsappNumber = process.env.BUSINESS_PHONE || '8801700000000'
+    const whatsappNumber = process.env.BUSINESS_PHONE || '8801913551490'
     const whatsappMsg = `🛍️ নতুন অর্ডার!\n\n👤 নাম: ${customerName}\n📞 ফোন: ${phone}\n📍 ঠিকানা: ${address}\n👗 পণ্য: ${products.map((p: { name: string; quantity: number }) => `${p.name} x${p.quantity}`).join(', ')}\n💰 মোট: ৳${totalAmount?.toLocaleString()}\n💳 পেমেন্ট: ${paymentMethod}`
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMsg)}`
 

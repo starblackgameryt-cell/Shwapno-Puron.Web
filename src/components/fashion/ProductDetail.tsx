@@ -92,7 +92,7 @@ export function ProductDetail({ product }: { product: Product }) {
     }
   }
 
-  const whatsappNumber = get('footer_whatsapp') || '8801700000000'
+  const whatsappNumber = get('footer_whatsapp') || '8801913551490'
   const businessEmail = get('footer_email') || 'dolamaanha@gmail.com'
   const whatsappMsg = `হ্যালো, আমি এই ড্রেসটি সম্পর্কে জানতে চাই: ${product.name} (৳${product.price.toLocaleString()})`
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMsg)}`

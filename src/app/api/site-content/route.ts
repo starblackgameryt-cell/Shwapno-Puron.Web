@@ -45,8 +45,8 @@ const defaultContent: Record<string, string> = {
 
   // Footer
   footer_brand_description: 'ঐতিহ্যবাহী কারুশিল্পের সাথে আধুনিক ফ্যাশনের মেলবন্ধন। আপনার জন্য সেরা পোশাক।',
-  footer_phone: '+880 1700-000000',
-  footer_whatsapp: '8801700000000',
+  footer_phone: '+880 1913551490',
+  footer_whatsapp: '8801913551490',
   footer_email: 'dolamaanha@gmail.com',
   footer_facebook: 'https://www.facebook.com/profile.php?id=100095208882295',
   footer_facebook_name: 'রাজশ্রী ফ্যাশন',

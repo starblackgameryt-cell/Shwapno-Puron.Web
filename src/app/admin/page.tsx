@@ -2546,7 +2546,7 @@ function SettingsTab({ admin, onLogout }: { admin: AdminUser; onLogout: () => vo
         <CardContent className="p-4 space-y-3">
           <p className="text-sm font-semibold text-stone-900">দ্রুত লিংক</p>
           <a
-            href="https://wa.me/8801700000000"
+            href="https://wa.me/8801913551490"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors"

@@ -180,7 +180,7 @@ export async function POST(request: Request) {
     if (existingContactMethods === 0) {
       await db.contactMethod.createMany({
         data: [
-          { name: 'WhatsApp', number: '+8801XXXXXXXXX', text: 'সরাসরি মেসেজ করুন', link: 'https://wa.me/8801700000000?text=হ্যালো, আমি পেমেন্ট করেছি।', icon: 'whatsapp', color: 'green', sortOrder: 0, isActive: true },
+          { name: 'WhatsApp', number: '+880 1913551490', text: 'সরাসরি মেসেজ করুন', link: 'https://wa.me/8801913551490?text=হ্যালো, আমি পেমেন্ট করেছি।', icon: 'whatsapp', color: 'green', sortOrder: 0, isActive: true },
           { name: 'Messenger', number: '@স্বপ্নপূরণ', text: 'Facebook মেসেজ', link: 'https://m.me/100095208882295', icon: 'messenger', color: 'blue', sortOrder: 1, isActive: true },
         ],
       })

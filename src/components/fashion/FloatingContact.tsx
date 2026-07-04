@@ -11,7 +11,7 @@ export function FloatingContact() {
   const { get } = useSiteContent()
   const { currentView } = useStore()
 
-  const whatsappNumber = get('footer_whatsapp') || '8801700000000'
+  const whatsappNumber = get('footer_whatsapp') || '8801913551490'
   const businessEmail = get('footer_email') || 'dolamaanha@gmail.com'
   const facebookUrl = get('footer_facebook') || ''
 
