@@ -52,12 +52,16 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: 'পোশাক পাওয়া যায়নি | স্বপ্ন পূরণ',
+      title: 'পোশাক পাওয়া যায়নি',
       robots: { index: false, follow: false },
     }
   }
 
-  const title = `${product.name} | স্বপ্ন পূরণ`
+  // Title is just the product name — the root layout's title template
+  // ("%s | স্বপ্ন পূরণ") appends the brand suffix automatically.
+  // For og:title/twitter:title we use the full string explicitly.
+  const title = product.name
+  const fullTitle = `${product.name} | স্বপ্ন পূরণ`
   const description = product.description.slice(0, 155)
   const imageUrl = product.image.startsWith('http')
     ? product.image
@@ -70,7 +74,7 @@ export async function generateMetadata({
     keywords: [product.name, product.category, product.fabric, 'স্বপ্ন পূরণ', 'বাংলাদেশি ফ্যাশন'],
     alternates: { canonical: pageUrl },
     openGraph: {
-      title,
+      title: fullTitle,
       description,
       type: 'website',
       url: pageUrl,
@@ -80,7 +84,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: fullTitle,
       description,
       images: [imageUrl],
     },
