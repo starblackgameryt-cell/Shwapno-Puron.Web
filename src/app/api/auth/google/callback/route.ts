@@ -134,7 +134,7 @@ export async function GET(request: NextRequest) {
       let admin = await db.admin.findUnique({ where: { email: ADMIN_EMAIL } })
 
       if (!admin) {
-        const hashedPassword = await hashPassword('shwapnopuron35356')
+        const hashedPassword = await hashPassword(process.env.ADMIN_PASSWORD || '')
         admin = await db.admin.create({
           data: {
             email: ADMIN_EMAIL,

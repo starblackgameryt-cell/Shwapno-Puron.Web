@@ -10,7 +10,7 @@ import {
 
 // Admin credentials from environment variables
 const DEFAULT_ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'dolamaanha@gmail.com'
-const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'shwapnopuron35356'
+const DEFAULT_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || ''
 const DEFAULT_ADMIN_NAME = 'স্বপ্ন পূরণ অ্যাডমিন'
 
 async function ensureAdminExists() {

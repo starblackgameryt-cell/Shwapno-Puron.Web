@@ -333,8 +333,8 @@ See **[DEPLOY-GUIDE.md](./DEPLOY-GUIDE.md)** for detailed instructions.
 ## 📦 Default Admin Credentials
 
 ```
-Email: dolamaanha@gmail.com
-Password: shwapnopuron35356
+Email: your-admin@email.com
+Password: your-admin-password
 ```
 
 > ⚠️ Change these in production via environment variables!
@@ -344,7 +344,7 @@ Password: shwapnopuron35356
 ## 📞 Default Business Info
 
 - **Phone/WhatsApp**: +880 1913551490
-- **Email**: dolamaanha@gmail.com
+- **Email**: your-admin@email.com
 - **Address**: ঢাকা, বাংলাদেশ (Dhaka, Bangladesh)
 - **Social**: WhatsApp, Facebook Messenger
 
@@ -374,7 +374,7 @@ When `/api/seed` is called (POST), the database populates with:
 - WhatsApp (+880 1913551490), Facebook Messenger
 
 ### 1 Admin Account
-- Email: dolamaanha@gmail.com (password hashed with scrypt)
+- Email: your-admin@email.com (password hashed with scrypt)
 
 ### 7 Site Content Entries
 - footer_phone, footer_whatsapp, footer_email, footer_address
@@ -427,7 +427,7 @@ Proprietary — © 2026 স্বপ্ন পূরণ (Shwapno Puron). All rig
 6. **Language**: Bengali UI throughout — preserve Bengali text in any edits
 7. **Branding**: Stone color palette (warm grays), no indigo/blue
 8. **Deploy**: Vercel + Turso — see DEPLOY-GUIDE.md
-9. **Admin login**: dolamaanha@gmail.com / shwapnopuron35356
+9. **Admin login**: your-admin@email.com / your-admin-password
 10. **Important files**:
     - `prisma/schema.prisma` — database schema
     - `src/lib/db.ts` — Prisma client (handles Turso + SQLite)

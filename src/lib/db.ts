@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client'
+import { createClient } from '@libsql/client'
+import { PrismaLibSQL } from '@prisma/adapter-libsql'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
@@ -11,18 +13,21 @@ function createPrismaClient() {
   const isTurso = databaseUrl.startsWith('libsql://')
 
   if (isTurso) {
-    // Dynamic import for Turso cloud (used in production/serverless)
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { createClient } = require('@libsql/client')
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { PrismaLibSQL } = require('@prisma/adapter-libsql')
-    
+    // Turso cloud (production / serverless)
+    const authToken = process.env.DATABASE_AUTH_TOKEN
+    if (!authToken) {
+      throw new Error(
+        'DATABASE_AUTH_TOKEN is required when DATABASE_URL points to Turso (libsql://). ' +
+        'Set it in your environment variables (Vercel → Settings → Environment Variables).'
+      )
+    }
+
     const libsql = createClient({
       url: databaseUrl,
-      authToken: process.env.DATABASE_AUTH_TOKEN || undefined,
+      authToken,
     })
     const adapter = new PrismaLibSQL(libsql)
-    
+
     return new PrismaClient({
       adapter,
       log: process.env.NODE_ENV === 'production' ? [] : ['error', 'warn'],
@@ -30,6 +35,7 @@ function createPrismaClient() {
   }
 
   // Standard SQLite client for local development
+  // (file:// URL or no DATABASE_URL → defaults to local file)
   return new PrismaClient({
     log: process.env.NODE_ENV === 'production' ? [] : ['error', 'warn'],
   })

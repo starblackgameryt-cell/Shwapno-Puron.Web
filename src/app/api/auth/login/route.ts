@@ -32,7 +32,7 @@ export async function POST(request: Request) {
 
       if (!admin) {
         // Create admin if doesn't exist yet
-        const hashedPassword = await hashPassword('shwapnopuron35356')
+        const hashedPassword = await hashPassword(process.env.ADMIN_PASSWORD || '')
         admin = await db.admin.create({
           data: {
             email: ADMIN_EMAIL,

@@ -88,11 +88,11 @@ function createPrismaClient() {
 **Required variables (5 total):**
 | Variable | Value |
 |----------|-------|
-| `DATABASE_URL` | `libsql://shwapno-puron-starblackgameryt-cell.aws-ap-south-1.turso.io` |
-| `DATABASE_AUTH_TOKEN` | `eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJleHAiOjE3ODU3ODkzMjcsImlhdCI6MTc4MzE5NzMyNywiaWQiOiIwMTlmMmVjZC1jNDAxLTc4YWItOWU0OC0zMGMyODJlOWJjMTMiLCJraWQiOiJqZDY5UHBPZUtwS2hDWTZlS255OF94ZDVxdVM1MzZHQkRGbkl1UlpGTGlrIiwicmlkIjoiOGI2Nzg3ZDAtOTI4Zi00MjUxLThlNjItYTNjODhlYmZmNDI4In0.1m5DJhbNRQRKQ2lYmoPsiPOii6Q93vPaiKKop1Rz2KVCevaegEHC7hrh-RIvi0vYlxOWYtW6NT-idTrz1hxiCw` |
-| `NEXTAUTH_SECRET` | `K9mZqL3vR7wXp2N8tY5bC1dF6gH4jJ0sA8eU3iW2` |
-| `ADMIN_EMAIL` | `dolamaanha@gmail.com` |
-| `ADMIN_PASSWORD` | `shwapnopuron35356` |
+| `DATABASE_URL` | `libsql://your-db-name.turso.io` |
+| `DATABASE_AUTH_TOKEN` | `your-turso-auth-token-here` |
+| `NEXTAUTH_SECRET` | `your-nextauth-secret-here` |
+| `ADMIN_EMAIL` | `your-admin@email.com` |
+| `ADMIN_PASSWORD` | `your-admin-password` |
 
 **Critical**: Each variable MUST have these environments ticked:
 - ✅ Production
@@ -262,7 +262,7 @@ curl -s -X POST https://shwapno-puron-web.vercel.app/api/seed
 
 ## 📞 Turso Database Info (for verification)
 
-- **Database URL**: `libsql://shwapno-puron-starblackgameryt-cell.aws-ap-south-1.turso.io`
+- **Database URL**: `libsql://your-db-name.turso.io`
 - **Region**: AWS ap-south-1 (Mumbai)
 - **Status**: ✅ Connected and seeded
 - **Data**: 8 products, 48 reviews, 4 payment methods, 2 contact methods, 1 admin, 7 site content entries
