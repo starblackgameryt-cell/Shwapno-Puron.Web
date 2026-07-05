@@ -18,12 +18,27 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
+const SITE_URL =
+  process.env.SITE_URL ||
+  process.env.NEXTAUTH_URL ||
+  "https://shwapno-puron-web.vercel.app";
+
 export const metadata: Metadata = {
-  title: "স্বপ্ন পূরণ — Shwapno Puron",
-  description: "ঐতিহ্যবাহী কারুশিল্পের সাথে আধুনিক ফ্যাশনের মেলবন্ধন। প্রিমিয়াম সালোয়ার কামিজ, শাড়ি ও লেহেঙ্গা।",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "স্বপ্ন পূরণ — Shwapno Puron",
+    template: "%s | স্বপ্ন পূরণ",
+  },
+  description:
+    "ঐতিহ্যবাহী কারুশিল্পের সাথে আধুনিক ফ্যাশনের মেলবন্ধন। প্রিমিয়াম সালোয়ার কামিজ, শাড়ি ও লেহেঙ্গা।",
   keywords: ["স্বপ্ন পূরণ", "ফ্যাশন", "সালোয়ার কামিজ", "শাড়ি", "লেহেঙ্গা", "বাংলাদেশি ফ্যাশন"],
   authors: [{ name: "স্বপ্ন পূরণ" }],
   icons: { icon: "/logo.svg" },
+  openGraph: {
+    type: "website",
+    locale: "bn_BD",
+    siteName: "স্বপ্ন পূরণ — Shwapno Puron",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

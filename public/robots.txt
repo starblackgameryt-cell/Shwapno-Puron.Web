@@ -12,3 +12,11 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Disallow auth-only & admin routes from indexing
+Disallow: /admin
+Disallow: /account
+Disallow: /reset-password
+Disallow: /api/
+
+Sitemap: https://shwapno-puron-web.vercel.app/sitemap.xml
