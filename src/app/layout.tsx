@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     locale: "bn_BD",
     siteName: "স্বপ্ন পূরণ — Shwapno Puron",
   },
+  verification: {
+    google: "uh5v58YOgmC_0YBVgHeWcb7nosGizGk3A6qVvMKOIJo",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
