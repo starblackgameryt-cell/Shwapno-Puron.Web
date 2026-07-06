@@ -133,11 +133,11 @@ export function Navbar() {
               </Button>
             )}
             {/* Heart - hidden on mobile, shown in dropdown */}
-            <button onClick={handleFavoritesClick} className="hidden sm:block relative p-2 hover:bg-stone-50 transition-colors" aria-label="পছন্দ">
+            <button onClick={handleFavoritesClick} className="hidden sm:block relative p-2 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-stone-50 rounded-lg transition-colors" aria-label="পছন্দ">
               <Heart className="w-5 h-5 text-stone-700" />
             </button>
             {/* User - hidden on mobile, shown in dropdown */}
-            <button onClick={handleUserClick} className="hidden sm:block relative p-2 hover:bg-stone-50 transition-colors" aria-label="অ্যাকাউন্ট">
+            <button onClick={handleUserClick} className="hidden sm:block relative p-2 min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-stone-50 rounded-lg transition-colors" aria-label="অ্যাকাউন্ট">
               {user && firstLetter ? (
                 user.avatar ? (
                   <span className="relative w-6 h-6 rounded-full overflow-hidden border border-stone-200">
@@ -147,7 +147,7 @@ export function Navbar() {
                     )}
                   </span>
                 ) : (
-                  <span className="relative w-5 h-5 bg-stone-900 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  <span className="relative w-6 h-6 bg-gradient-to-br from-emerald-600 to-emerald-800 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-md">
                     {firstLetter}
                     {user.emailVerified && (
                       <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-emerald-500 rounded-full border border-white" />
@@ -240,7 +240,7 @@ export function Navbar() {
                         <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                       </span>
                     ) : (
-                      <span className="w-5 h-5 bg-stone-900 text-white text-[9px] font-bold rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="w-6 h-6 bg-gradient-to-br from-emerald-600 to-emerald-800 text-white text-[9px] font-bold rounded-full flex items-center justify-center flex-shrink-0 ring-2 ring-white shadow-md">
                         {firstLetter}
                       </span>
                     )

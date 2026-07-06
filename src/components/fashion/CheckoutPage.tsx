@@ -205,7 +205,11 @@ export function CheckoutPage() {
   }
 
   return (
-    <FadeIn className="pt-20 sm:pt-32 pb-24 sm:pb-20 min-h-[100svh] bg-white">
+    // Plain div instead of <FadeIn> — FadeIn sets will-change:transform which
+    // creates a containing block that breaks position:sticky for the order
+    // summary sidebar on desktop. The scroll-reveal animation is sacrificed
+    // in favor of correct sticky positioning.
+    <div className="pt-20 sm:pt-32 pb-24 sm:pb-20 min-h-[100svh] bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <button onClick={goHome} className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors mb-4 sm:mb-8 group min-h-[44px]">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -336,6 +340,6 @@ export function CheckoutPage() {
           </div>
         </div>
       </div>
-    </FadeIn>
+    </div>
   )
 }

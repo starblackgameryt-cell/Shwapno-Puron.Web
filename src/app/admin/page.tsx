@@ -2504,7 +2504,7 @@ function SettingsTab({ admin, onLogout }: { admin: AdminUser; onLogout: () => vo
       <Card className="border-stone-100 shadow-sm">
         <CardContent className="p-4">
           <div className="flex items-center gap-3 mb-4">
-            <div className="size-12 rounded-full bg-stone-900 flex items-center justify-center">
+            <div className="size-12 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center ring-2 ring-white shadow-md">
               <span className="text-white font-bold text-lg">
                 {admin.name.charAt(0)}
               </span>
@@ -2902,8 +2902,8 @@ export default function AdminPage() {
               <ArrowLeft className="size-3.5" />
               <span className="hidden sm:inline">স্টোরে ফিরুন</span>
             </button>
-            <div className="size-8 rounded-full bg-stone-100 flex items-center justify-center">
-              <span className="text-stone-600 font-semibold text-xs">
+            <div className="size-8 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center ring-2 ring-white shadow-md">
+              <span className="text-white font-semibold text-xs">
                 {admin?.name.charAt(0) || 'A'}
               </span>
             </div>

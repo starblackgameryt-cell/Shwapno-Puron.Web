@@ -320,7 +320,7 @@ function ProfileTab({ user, onUserUpdate }: { user: UserData; onUserUpdate: (u: 
             />
           </div>
         ) : (
-          <div className="size-20 rounded-full bg-stone-900 flex items-center justify-center mb-3 shadow-lg">
+          <div className="size-20 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center mb-3 shadow-lg ring-4 ring-white">
             <span className="text-3xl font-black text-white">{firstLetter}</span>
           </div>
         )}
@@ -1014,7 +1014,7 @@ function SettingsTab({ user, onLogout }: { user: UserData; onLogout: () => void 
                 />
               </div>
             ) : (
-              <div className="size-12 rounded-full bg-stone-900 flex items-center justify-center shrink-0">
+              <div className="size-12 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shrink-0 ring-2 ring-white shadow-md">
                 <span className="text-lg font-bold text-white">{firstLetter}</span>
               </div>
             )}
