@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,6 +15,7 @@ import {
   Package,
   Settings,
   LogOut,
+  ArrowLeft,
   Edit,
   Trash2,
   Loader2,
@@ -1085,6 +1087,7 @@ function SettingsTab({ user, onLogout }: { user: UserData; onLogout: () => void 
 // ============ Main Account Page ============
 export default function AccountPage() {
   const { data: nextAuthSession } = useSession()
+  const router = useRouter()
   const [user, setUser] = useState<UserData | null>(null)
   const [activeTab, setActiveTab] = useState<TabType>('profile')
   const [loading, setLoading] = useState(true)
@@ -1202,15 +1205,26 @@ export default function AccountPage() {
               title={user.emailVerified ? 'ইমেইল ভেরিফাইড' : 'ইমেইল আনভেরিফাইড'}
             />
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleLogout}
-            className="text-stone-500 hover:text-red-600 hover:bg-red-50 text-xs h-8"
-          >
-            <LogOut className="size-3.5 mr-1" />
-            লগআউট
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push('/')}
+              className="text-stone-500 hover:text-stone-900 hover:bg-stone-100 text-xs h-8"
+            >
+              <ArrowLeft className="size-3.5 mr-1" />
+              হোমে ফিরুন
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="text-stone-500 hover:text-red-600 hover:bg-red-50 text-xs h-8"
+            >
+              <LogOut className="size-3.5 mr-1" />
+              লগআউট
+            </Button>
+          </div>
         </div>
       </header>
 

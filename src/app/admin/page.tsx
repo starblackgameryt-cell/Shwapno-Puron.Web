@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,6 +17,7 @@ import {
   Package,
   Settings,
   LogOut,
+  ArrowLeft,
   Plus,
   Edit,
   Trash2,
@@ -2723,6 +2725,7 @@ export default function AdminPage() {
     verifyIntervalRef.current = null
   }, [])
 
+  const router = useRouter()
   const handleLogout = useCallback(async () => {
     clearTimers()
     try {
@@ -2891,6 +2894,14 @@ export default function AdminPage() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => router.push('/')}
+              className="flex items-center gap-1 text-stone-500 hover:text-stone-900 hover:bg-stone-100 transition-colors text-xs font-medium px-2.5 h-8 rounded-md"
+              title="স্টোরে ফিরুন"
+            >
+              <ArrowLeft className="size-3.5" />
+              <span className="hidden sm:inline">স্টোরে ফিরুন</span>
+            </button>
             <div className="size-8 rounded-full bg-stone-100 flex items-center justify-center">
               <span className="text-stone-600 font-semibold text-xs">
                 {admin?.name.charAt(0) || 'A'}
