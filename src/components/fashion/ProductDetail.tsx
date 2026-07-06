@@ -101,6 +101,7 @@ export function ProductDetail({ product }: { product: Product }) {
   const gmailUrl = `mailto:${businessEmail}?subject=${encodeURIComponent(gmailSubject)}&body=${encodeURIComponent(gmailBody)}`
 
   return (
+    <>
     <FadeIn className="pt-16 sm:pt-24 lg:pt-32 pb-36 lg:pb-8 min-h-[100svh] bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <button onClick={goHome} className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors mb-4 sm:mb-8 group min-h-[44px]">
@@ -360,18 +361,22 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
       </div>
 
-      {/* Mobile sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-stone-100 p-3 sm:p-4 lg:hidden z-30" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}>
-        <div className="flex gap-2 sm:gap-3 max-w-lg mx-auto">
-          <Button onClick={handleAddToList} className="flex-1 bg-stone-100 hover:bg-stone-200 text-stone-900 py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.12em] uppercase font-bold min-h-[44px]">
-            <ClipboardList className="w-4 h-4 mr-1.5" />
-            তালিকায় যোগ
-          </Button>
-          <Button onClick={handleBuyNow} className="flex-1 bg-amber-700 hover:bg-amber-800 text-white py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.12em] uppercase font-bold min-h-[44px]">
-            এখনই কিনুন
-          </Button>
-        </div>
-      </div>
     </FadeIn>
+
+    {/* Mobile sticky CTA — OUTSIDE FadeIn so position:fixed works relative
+         to the viewport (FadeIn sets will-change:transform, which creates a
+         containing block that breaks position:fixed for descendants). */}
+    <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-stone-100 p-3 sm:p-4 lg:hidden z-30" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom, 0px))' }}>
+      <div className="flex gap-2 sm:gap-3 max-w-lg mx-auto">
+        <Button onClick={handleAddToList} className="flex-1 bg-stone-100 hover:bg-stone-200 text-stone-900 py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.12em] uppercase font-bold min-h-[44px]">
+          <ClipboardList className="w-4 h-4 mr-1.5" />
+          তালিকায় যোগ
+        </Button>
+        <Button onClick={handleBuyNow} className="flex-1 bg-amber-700 hover:bg-amber-800 text-white py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.12em] uppercase font-bold min-h-[44px]">
+          এখনই কিনুন
+        </Button>
+      </div>
+    </div>
+    </>
   )
 }
