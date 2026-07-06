@@ -144,7 +144,7 @@ const emptyProductForm: ProductForm = {
   stock: '10',
 }
 
-const categories = ['সালোয়ার কামিজ', 'শাড়ি', 'লেহেঙ্গা', 'কুর্তা', 'শারারা', 'ঘারারা']
+const DEFAULT_CATEGORIES = ['সালোয়ার কামিজ', 'শাড়ি', 'লেহেঙ্গা', 'কুর্তা', 'শারারা', 'ঘারারা']
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -642,6 +642,27 @@ function ProductModal({
   const [productImagesUploading, setProductImagesUploading] = useState(false)
   const productImageInputRef = useRef<HTMLInputElement>(null)
   const productImagesInputRef = useRef<HTMLInputElement>(null)
+  // Stateful category list — starts with defaults, new categories persist for
+  // the rest of the admin session (not saved to DB; categories are only stored
+  // as a string on each Product). Future enhancement: derive from existing products.
+  const [categories, setCategories] = useState<string[]>(DEFAULT_CATEGORIES)
+  const [newCategory, setNewCategory] = useState('')
+
+  const handleAddCategory = () => {
+    const trimmed = newCategory.trim()
+    if (!trimmed) return
+    // Case-insensitive duplicate check — find existing match if any
+    const existing = categories.find((c) => c.toLowerCase() === trimmed.toLowerCase())
+    if (existing) {
+      // Already exists — just select it (don't add a duplicate pill)
+      setForm((prev) => ({ ...prev, category: existing }))
+    } else {
+      // New category — add to list and auto-select
+      setCategories((prev) => [...prev, trimmed])
+      setForm((prev) => ({ ...prev, category: trimmed }))
+    }
+    setNewCategory('')
+  }
 
   useEffect(() => {
     if (product) {
@@ -767,6 +788,32 @@ function ProductModal({
                   {cat}
                 </button>
               ))}
+            </div>
+            {/* Custom category input — add new category as a pill */}
+            <div className="flex gap-2 pt-1">
+              <Input
+                type="text"
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    handleAddCategory()
+                  }
+                }}
+                placeholder="নতুন ক্যাটাগরি লিখুন..."
+                className="h-8 text-xs bg-stone-50/50 flex-1 min-w-[120px]"
+              />
+              <button
+                type="button"
+                onClick={handleAddCategory}
+                disabled={!newCategory.trim()}
+                className="flex items-center gap-1 px-3 h-8 rounded-full text-xs font-medium bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900 transition-all disabled:opacity-40 disabled:cursor-not-allowed min-h-[36px]"
+                title="ক্যাটাগরি যোগ করুন"
+              >
+                <Plus className="size-3" />
+                যোগ করুন
+              </button>
             </div>
           </div>
 
