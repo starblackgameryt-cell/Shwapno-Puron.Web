@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Cormorant_Garamond, Baloo_Da_2 } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/components/auth-provider";
@@ -10,12 +10,26 @@ const inter = Inter({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const balooDa2 = Baloo_Da_2({
+  variable: "--font-baloo",
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#ffffff",
+  themeColor: "#0B3D2E",
 };
 
 const SITE_URL =
@@ -47,7 +61,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="bn" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased bg-background text-foreground overscroll-none`}>
+      <body className={`${inter.variable} ${cormorant.variable} ${balooDa2.variable} antialiased bg-background text-foreground overscroll-none`}>
         <AuthProvider>
           {children}
         </AuthProvider>

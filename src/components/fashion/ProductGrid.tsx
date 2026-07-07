@@ -70,15 +70,15 @@ export function ProductGrid({ products }: { products: Product[] }) {
   }
 
   return (
-    <section id="shop" className="py-12 sm:py-20 lg:py-32 bg-white">
+    <section id="shop" className="py-12 sm:py-20 lg:py-32 bg-brand-ivory">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-4 mb-8 sm:mb-16">
             <div>
-              <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-stone-400 font-medium">আমাদের কালেকশন</span>
-              <h2 className="mt-1.5 sm:mt-2 text-2xl sm:text-4xl md:text-5xl font-black text-stone-900 tracking-tight">সব পোশাক</h2>
+              <span className="text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] uppercase text-brand-gold font-medium font-serif-lux">আমাদের কালেকশন</span>
+              <h2 className="mt-1.5 sm:mt-2 text-2xl sm:text-4xl md:text-5xl font-black text-brand-emerald tracking-tight font-display zari-underline">সব পোশাক</h2>
             </div>
-            <p className="text-xs sm:text-sm text-stone-500 max-w-xs">প্রতিটি পোশাক সুচিন্তিতভাবে ডিজাইন করা, আপনাকে অসাধারণ অনুভব করাতে।</p>
+            <p className="text-xs sm:text-sm text-brand-charcoal/60 max-w-xs">প্রতিটি পোশাক সুচিন্তিতভাবে ডিজাইন করা, আপনাকে অসাধারণ অনুভব করাতে।</p>
           </div>
         </ScrollReveal>
 
@@ -88,10 +88,10 @@ export function ProductGrid({ products }: { products: Product[] }) {
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.25 }}
-                className="group cursor-pointer"
+                className="group cursor-pointer silk-hover bg-brand-ivory border border-[#E6DFD0]"
                 onClick={() => setSelectedProduct(product.id)}
               >
-                <div className="relative aspect-[3/4] overflow-hidden bg-stone-100">
+                <div className="relative aspect-[3/4] overflow-hidden bg-stone-100 img-zoom">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -99,11 +99,11 @@ export function ProductGrid({ products }: { products: Product[] }) {
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
                   />
-                  <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/5 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-brand-emerald/0 group-hover:bg-brand-emerald/5 transition-colors duration-500" />
 
                   {/* Wishlist button */}
                   <motion.button
-                    className="absolute top-2 right-2 sm:top-3 sm:right-3 p-2 sm:p-2 bg-white shadow-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0 hover:bg-stone-900 hover:text-white z-10 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center"
+                    className="absolute top-2 right-2 sm:top-3 sm:right-3 p-2 sm:p-2 bg-brand-ivory shadow-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0 hover:bg-brand-emerald hover:text-brand-ivory z-10 min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0 flex items-center justify-center border border-[#E6DFD0]"
                     onClick={(e) => toggleFavorite(e, product.id)}
                     aria-label="পছন্দে যোগ করুন"
                     animate={animatingHeart === product.id ? { scale: [1, 1.3, 1] } : { scale: 1 }}
@@ -123,15 +123,15 @@ export function ProductGrid({ products }: { products: Product[] }) {
                   </motion.button>
 
                   {/* Category tag */}
-                  <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-white px-2 py-0.5 sm:px-3 sm:py-1">
-                    <span className="text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium text-stone-600">{product.category}</span>
+                  <div className="absolute top-2 left-2 sm:top-3 sm:left-3 bg-brand-ivory px-2 py-0.5 sm:px-3 sm:py-1 border border-[#C9A961]/30">
+                    <span className="text-[8px] sm:text-[10px] tracking-[0.1em] sm:tracking-[0.15em] uppercase font-medium text-brand-emerald">{product.category}</span>
                   </div>
 
                   {/* Hover: বিস্তারিত দেখুন */}
                   <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 translate-y-0 sm:translate-y-3 sm:group-hover:translate-y-0">
                     <button
                       onClick={(e) => handleBuyNow(e, product)}
-                      className="w-full bg-stone-900 hover:bg-stone-800 text-white py-3 sm:py-4 text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold min-h-[44px]"
+                      className="w-full btn-lux py-3 sm:py-4 text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase font-bold min-h-[44px]"
                     >
                       বিস্তারিত দেখুন
                     </button>
@@ -140,26 +140,26 @@ export function ProductGrid({ products }: { products: Product[] }) {
 
                 {/* Product info */}
                 <div className="pt-2 sm:pt-4 px-0.5">
-                  <h3 className="text-[10px] sm:text-sm font-bold text-stone-900 uppercase tracking-wider group-hover:text-amber-700 transition-colors line-clamp-1">{product.name}</h3>
+                  <h3 className="text-[10px] sm:text-sm font-bold text-brand-emerald uppercase tracking-wider group-hover:text-brand-maroon transition-colors line-clamp-1">{product.name}</h3>
                   <div className="flex items-center justify-between mt-1 sm:mt-1.5">
-                    <p className="text-xs sm:text-base font-semibold text-stone-900">৳{product.price.toLocaleString()}</p>
-                    <div className="flex items-center gap-0.5 sm:gap-1"><Star className="w-3 h-3 fill-amber-400 text-amber-400" /><span className="text-[9px] sm:text-[10px] text-stone-500">{product.rating}</span></div>
+                    <p className="text-xs sm:text-base font-semibold text-brand-charcoal">৳{product.price.toLocaleString()}</p>
+                    <div className="flex items-center gap-0.5 sm:gap-1"><Star className="w-3 h-3 fill-amber-400 text-amber-400" /><span className="text-[9px] sm:text-[10px] text-brand-charcoal/60">{product.rating}</span></div>
                   </div>
 
                   {/* এখনই কিনুন + তালিকায় যোগ */}
                   <div className="mt-2 sm:mt-3 flex gap-1.5 sm:gap-2">
                     <button
                       onClick={(e) => handleBuyNow(e, product)}
-                      className="flex-1 bg-stone-900 hover:bg-stone-800 text-white py-2.5 sm:py-2.5 text-[9px] sm:text-[11px] tracking-[0.08em] sm:tracking-[0.1em] uppercase font-bold transition-colors min-h-[44px] sm:min-h-0"
+                      className="flex-1 btn-lux py-2.5 sm:py-2.5 text-[9px] sm:text-[11px] tracking-[0.08em] sm:tracking-[0.1em] uppercase font-bold transition-colors min-h-[44px] sm:min-h-0"
                     >
                       এখনই কিনুন
                     </button>
                     <button
                       onClick={(e) => handleAddToList(e, product)}
-                      className="w-11 sm:w-11 border-2 border-stone-200 hover:border-stone-400 flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0"
+                      className="w-11 sm:w-11 border-2 border-[#C9A961]/40 hover:border-brand-gold flex items-center justify-center transition-colors min-w-[44px] min-h-[44px] sm:min-w-0 sm:min-h-0"
                       aria-label="তালিকায় যোগ করুন"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-stone-600" />
+                      <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-emerald" />
                     </button>
                   </div>
                 </div>

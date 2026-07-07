@@ -43,7 +43,7 @@ export function FloatingContact() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 15, scale: 0.9 }}
             transition={{ duration: 0.15 }}
-            className="bg-white rounded-2xl shadow-2xl border border-stone-100 p-3 sm:p-4 w-[260px] sm:w-64 mb-2"
+            className="bg-brand-ivory rounded-2xl shadow-2xl border border-[#C9A961]/30 p-3 sm:p-4 w-[260px] sm:w-64 mb-2"
           >
             <div className="flex items-center justify-between mb-2 sm:mb-3">
               <span className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase tracking-wider">যোগাযোগ</span>
@@ -51,19 +51,19 @@ export function FloatingContact() {
             </div>
             <div className="space-y-1.5 sm:space-y-2">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 sm:p-3 hover:bg-emerald-50 rounded-xl transition-colors group min-h-[44px]">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0"><MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" /></div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-emerald-500 rounded-full flex items-center justify-center flex-shrink-0"><MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-brand-ivory" /></div>
                 <div><p className="text-[10px] sm:text-xs font-semibold text-stone-900">WhatsApp</p><p className="text-[8px] sm:text-[10px] text-stone-400">সরাসরি মেসেজ করুন</p></div>
               </a>
               <a href={messengerUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 sm:p-3 hover:bg-blue-50 rounded-xl transition-colors group min-h-[44px]">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0"><MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-white" /></div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0"><MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-brand-ivory" /></div>
                 <div><p className="text-[10px] sm:text-xs font-semibold text-stone-900">Messenger</p><p className="text-[8px] sm:text-[10px] text-stone-400">Facebook মেসেজ</p></div>
               </a>
               <a href={emailUrl} className="flex items-center gap-2.5 p-2.5 sm:p-3 hover:bg-red-50 rounded-xl transition-colors group min-h-[44px]">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0"><Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white" /></div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0"><Mail className="w-4 h-4 sm:w-5 sm:h-5 text-brand-ivory" /></div>
                 <div><p className="text-[10px] sm:text-xs font-semibold text-stone-900">ইমেইল</p><p className="text-[8px] sm:text-[10px] text-stone-400">মেইল পাঠান</p></div>
               </a>
               <a href={`tel:+${whatsappNumber}`} className="flex items-center gap-2.5 p-2.5 sm:p-3 hover:bg-stone-50 rounded-xl transition-colors group min-h-[44px]">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-stone-800 rounded-full flex items-center justify-center flex-shrink-0"><Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" /></div>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-stone-800 rounded-full flex items-center justify-center flex-shrink-0"><Phone className="w-4 h-4 sm:w-5 sm:h-5 text-brand-ivory" /></div>
                 <div><p className="text-[10px] sm:text-xs font-semibold text-stone-900">কল করুন</p><p className="text-[8px] sm:text-[10px] text-stone-400">+{whatsappNumber}</p></div>
               </a>
             </div>
@@ -74,7 +74,7 @@ export function FloatingContact() {
       <motion.button
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center transition-colors min-w-[44px] min-h-[44px]"
+        className="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-500 hover:bg-emerald-600 text-brand-ivory rounded-full shadow-lg flex items-center justify-center transition-colors min-w-[44px] min-h-[44px]"
         aria-label="যোগাযোগ করুন"
       >
         <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />

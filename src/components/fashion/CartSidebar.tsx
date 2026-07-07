@@ -28,18 +28,18 @@ export function CartSidebar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-white z-50 shadow-2xl flex flex-col"
+            className="fixed right-0 top-0 h-full w-full sm:w-[420px] bg-brand-ivory z-50 shadow-2xl flex flex-col"
           >
             {/* হেডার */}
-            <div className="flex items-center justify-between p-6 border-b border-stone-100">
+            <div className="flex items-center justify-between p-6 border-b border-[#E6DFD0]">
               <div className="flex items-center gap-3">
                 <ShoppingBag className="w-5 h-5 text-stone-700" />
-                <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-stone-900">
+                <h2 className="text-sm font-bold tracking-[0.2em] uppercase text-brand-emerald">
                   আমার তালিকা ({count})
                 </h2>
               </div>
-              <button onClick={toggleList} className="p-2 hover:bg-stone-50 transition-colors" aria-label="বন্ধ করুন">
-                <X className="w-5 h-5 text-stone-500" />
+              <button onClick={toggleList} className="p-2 hover:bg-brand-ivory transition-colors" aria-label="বন্ধ করুন">
+                <X className="w-5 h-5 text-brand-charcoal/60" />
               </button>
             </div>
 
@@ -65,18 +65,18 @@ export function CartSidebar() {
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xs font-bold text-stone-900 uppercase tracking-wider truncate">{item.name}</h3>
+                      <h3 className="text-xs font-bold text-brand-emerald uppercase tracking-wider truncate">{item.name}</h3>
                       <p className="text-[10px] text-stone-400 mt-1 uppercase tracking-wider">
                         {item.size} / {item.color}
                       </p>
-                      <p className="text-sm font-semibold text-stone-900 mt-1">৳{item.price.toLocaleString()}</p>
+                      <p className="text-sm font-semibold text-brand-emerald mt-1">৳{item.price.toLocaleString()}</p>
                       <div className="flex items-center justify-between mt-2">
                         <div className="flex items-center gap-2">
-                          <button onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1))} className="w-7 h-7 border border-stone-200 flex items-center justify-center hover:border-stone-400 transition-colors">
+                          <button onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1))} className="w-7 h-7 border border-[#C9A961]/30 flex items-center justify-center hover:border-stone-400 transition-colors">
                             <Minus className="w-3 h-3" />
                           </button>
                           <span className="text-xs w-4 text-center">{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.productId, item.quantity + 1)} className="w-7 h-7 border border-stone-200 flex items-center justify-center hover:border-stone-400 transition-colors">
+                          <button onClick={() => updateQuantity(item.productId, item.quantity + 1)} className="w-7 h-7 border border-[#C9A961]/30 flex items-center justify-center hover:border-stone-400 transition-colors">
                             <Plus className="w-3 h-3" />
                           </button>
                         </div>
@@ -92,16 +92,16 @@ export function CartSidebar() {
 
             {/* ফুটার */}
             {list.length > 0 && (
-              <div className="border-t border-stone-100 p-6 space-y-4">
+              <div className="border-t border-[#E6DFD0] p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-stone-500 uppercase tracking-wider">মোট</span>
-                  <span className="text-lg font-black text-stone-900">৳{total.toLocaleString()}</span>
+                  <span className="text-xs text-brand-charcoal/60 uppercase tracking-wider">মোট</span>
+                  <span className="text-lg font-black text-brand-emerald">৳{total.toLocaleString()}</span>
                 </div>
                 <p className="text-[10px] text-stone-400 uppercase tracking-wider">ডেলিভারি চার্জ চেকআউটে যোগ হবে</p>
-                <Button className="w-full bg-stone-900 hover:bg-stone-800 text-white py-6 rounded-none text-[11px] tracking-[0.2em] uppercase transition-all duration-300">
+                <Button className="w-full btn-lux py-6 rounded-none text-[11px] tracking-[0.2em] uppercase transition-all duration-300">
                   অর্ডার করুন
                 </Button>
-                <button onClick={clearList} className="w-full text-center text-[10px] text-stone-400 hover:text-stone-600 transition-colors py-2 uppercase tracking-wider">
+                <button onClick={clearList} className="w-full text-center text-[10px] text-stone-400 hover:text-brand-charcoal/70 transition-colors py-2 uppercase tracking-wider">
                   তালিকা মুছুন
                 </button>
               </div>

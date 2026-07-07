@@ -132,7 +132,7 @@ export function CheckoutPage() {
   // Order placed success screen
   if (orderPlaced) {
     return (
-      <FadeIn className="pt-20 sm:pt-32 pb-16 sm:pb-20 min-h-[100svh] bg-white">
+      <FadeIn className="pt-20 sm:pt-32 pb-16 sm:pb-20 min-h-[100svh] bg-brand-ivory">
         <div className="max-w-lg mx-auto px-4 text-center">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', damping: 15 }} className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
             <Check className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-600" />
@@ -155,7 +155,7 @@ export function CheckoutPage() {
               </p>
               <div className="flex items-center justify-between bg-white p-3 border border-amber-200">
                 <div>
-                  <p className="text-sm font-bold text-stone-900">{selectedPayment.name}</p>
+                  <p className="text-sm font-bold text-brand-charcoal">{selectedPayment.name}</p>
                   <p className="text-lg font-black text-amber-700 tracking-wider">{selectedPayment.number}</p>
                   {selectedPayment.text && <p className="text-[10px] text-stone-500 mt-0.5">{selectedPayment.text}</p>}
                 </div>
@@ -166,7 +166,7 @@ export function CheckoutPage() {
 
           {/* Contact methods */}
           {contactMethods.length > 0 && (
-            <div className="mt-4 p-4 sm:p-5 bg-stone-50 border border-stone-200 text-left">
+            <div className="mt-4 p-4 sm:p-5 bg-brand-ivory border border-[#C9A961]/30 text-left">
               <p className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase tracking-wider mb-2">
                 📱 {get('order_contact_title') || 'যোগাযোগ করুন'}
               </p>
@@ -180,14 +180,14 @@ export function CheckoutPage() {
                     href={method.link || '#'}
                     target={method.link ? '_blank' : undefined}
                     rel={method.link ? 'noopener noreferrer' : undefined}
-                    className="w-full flex items-center gap-3 p-3 bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-all min-h-[44px]"
+                    className="w-full flex items-center gap-3 p-3 bg-white border border-[#C9A961]/30 hover:border-stone-400 hover:bg-brand-ivory transition-all min-h-[44px]"
                   >
                     <div className={`w-9 h-9 sm:w-10 sm:h-10 ${getMethodColor(method.color)} rounded-full flex items-center justify-center flex-shrink-0 text-white`}>
                       <span className="text-xs font-bold">{getMethodIcon(method.icon)}</span>
                     </div>
                     <div className="flex-1 min-w-0 text-left">
-                      <p className="text-xs font-bold text-stone-900">{method.name}</p>
-                      <p className="text-[10px] text-stone-500">{method.number || method.text}</p>
+                      <p className="text-xs font-bold text-brand-charcoal">{method.name}</p>
+                      <p className="text-[10px] text-brand-charcoal/60">{method.number || method.text}</p>
                     </div>
                     <ExternalLink className="w-3.5 h-3.5 text-stone-400 flex-shrink-0" />
                   </a>
@@ -196,7 +196,7 @@ export function CheckoutPage() {
             </div>
           )}
 
-          <Button onClick={goHome} className="w-full mt-4 sm:mt-6 bg-stone-900 hover:bg-stone-800 text-white py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase min-h-[44px]">
+          <Button onClick={goHome} className="w-full mt-4 sm:mt-6 btn-lux py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase min-h-[44px]">
             {get('order_home_button') || 'হোমে ফিরে যান'}
           </Button>
         </div>
@@ -209,9 +209,9 @@ export function CheckoutPage() {
     // creates a containing block that breaks position:sticky for the order
     // summary sidebar on desktop. The scroll-reveal animation is sacrificed
     // in favor of correct sticky positioning.
-    <div className="pt-20 sm:pt-32 pb-24 sm:pb-20 min-h-[100svh] bg-white">
+    <div className="pt-20 sm:pt-32 pb-24 sm:pb-20 min-h-[100svh] bg-brand-ivory">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button onClick={goHome} className="flex items-center gap-2 text-stone-500 hover:text-stone-900 transition-colors mb-4 sm:mb-8 group min-h-[44px]">
+        <button onClick={goHome} className="flex items-center gap-2 text-brand-charcoal/60 hover:text-brand-emerald transition-colors mb-4 sm:mb-8 group min-h-[44px]">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span className="text-[11px] tracking-[0.2em] uppercase font-medium">{get('order_back_button') || 'ফিরে যান'}</span>
         </button>
@@ -219,7 +219,7 @@ export function CheckoutPage() {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-stone-900 tracking-tight uppercase">
           {get('order_title') || 'অর্ডার করুন'}
         </h1>
-        <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-stone-500">
+        <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-brand-charcoal/60">
           {get('order_subtitle') || `অর্ডার করলে স্বয়ংক্রিয়ভাবে আমাদের Gmail (${notificationEmail}) এ নোটিফিকেশন যাবে`}
         </p>
 
@@ -228,7 +228,7 @@ export function CheckoutPage() {
           <div className="lg:col-span-3 space-y-6 sm:space-y-8">
             {/* Customer Info */}
             <div className="space-y-3 sm:space-y-4">
-              <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-stone-900">
+              <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-charcoal">
                 {get('order_info_title') || 'আপনার তথ্য'}
               </h2>
               <Input placeholder={get('order_name_placeholder') || 'আপনার নাম'} value={customerName} onChange={(e) => setCustomerName(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
@@ -239,7 +239,7 @@ export function CheckoutPage() {
 
             {/* Payment Methods - Dynamic */}
             <div className="space-y-3 sm:space-y-4">
-              <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-stone-900">
+              <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-charcoal">
                 {get('order_payment_title') || 'পেমেন্ট পদ্ধতি'}
               </h2>
 
@@ -250,7 +250,7 @@ export function CheckoutPage() {
               )}
 
               {paymentMethods.length === 0 && (
-                <div className="p-4 bg-stone-50 border border-stone-200 text-center">
+                <div className="p-4 bg-brand-ivory border border-[#C9A961]/30 text-center">
                   <p className="text-xs text-stone-400">{get('order_no_payment_text') || 'কোনো পেমেন্ট পদ্ধতি যোগ করা হয়নি। অ্যাডমিন প্যানেল থেকে পেমেন্ট পদ্ধতি যোগ করুন।'}</p>
                 </div>
               )}
@@ -262,8 +262,8 @@ export function CheckoutPage() {
                     onClick={() => setSelectedPaymentId(method.id)}
                     className={`p-3 sm:p-4 border-2 transition-all duration-200 text-left min-h-[44px] ${
                       selectedPaymentId === method.id
-                        ? 'border-stone-900 bg-stone-50'
-                        : 'border-stone-200 hover:border-stone-400'
+                        ? 'border-stone-900 bg-brand-ivory'
+                        : 'border-[#C9A961]/30 hover:border-stone-400'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -271,7 +271,7 @@ export function CheckoutPage() {
                         <span className="text-[10px] sm:text-xs font-bold">{getMethodIcon(method.icon)}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[10px] sm:text-xs font-bold text-stone-900">{method.name}</p>
+                        <p className="text-[10px] sm:text-xs font-bold text-brand-charcoal">{method.name}</p>
                         {method.number && <p className="text-[9px] sm:text-[10px] text-stone-400 mt-0.5">{method.number}</p>}
                         {method.text && <p className="text-[8px] sm:text-[9px] text-stone-400 truncate">{method.text}</p>}
                       </div>
@@ -298,8 +298,8 @@ export function CheckoutPage() {
           </div>
 
           {/* Right - Order Summary */}
-          <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-stone-200 pt-6 lg:pt-0">
-            <div className="bg-stone-50 p-4 sm:p-6 sticky top-20 sm:top-28">
+          <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-[#C9A961]/30 pt-6 lg:pt-0">
+            <div className="bg-brand-ivory p-4 sm:p-6 sticky top-20 sm:top-28">
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-stone-900 mb-3 sm:mb-4">
                 {get('order_summary_title') || 'অর্ডার সারাংশ'}
               </h2>
@@ -315,9 +315,9 @@ export function CheckoutPage() {
                 ))}
               </div>
               {list.length === 0 && <p className="text-[10px] sm:text-xs text-stone-400">{get('order_empty_cart_text') || 'তালিকায় কোনো পোশাক নেই'}</p>}
-              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-stone-200 flex justify-between">
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#C9A961]/30 flex justify-between">
                 <span className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase">{get('order_total_label') || 'মোট'}</span>
-                <span className="text-base sm:text-lg font-black text-stone-900">৳{total.toLocaleString()}</span>
+                <span className="text-base sm:text-lg font-black text-brand-charcoal">৳{total.toLocaleString()}</span>
               </div>
 
               <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-red-50 border border-red-100">
@@ -332,7 +332,7 @@ export function CheckoutPage() {
               <Button
                 onClick={handleSubmit}
                 disabled={!customerName || !phone || !address || !selectedPaymentId || list.length === 0 || submitting}
-                className="w-full mt-4 sm:mt-6 bg-stone-900 hover:bg-stone-800 text-white py-4 sm:py-6 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]"
+                className="w-full mt-4 sm:mt-6 btn-lux py-4 sm:py-6 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]"
               >
                 {submitting ? (get('order_processing_text') || 'প্রসেসিং...') : (get('order_button_text') || 'অর্ডার নিশ্চিত করুন')}
               </Button>

@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-stone-50 px-4 py-8">
+    <div className="min-h-screen flex items-center justify-center bg-brand-ivory px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -82,13 +82,13 @@ export default function ForgotPasswordPage() {
         {/* Back to login */}
         <Link
           href="/login"
-          className="inline-flex items-center gap-1.5 text-stone-500 hover:text-stone-700 text-sm mb-6 transition-colors"
+          className="inline-flex items-center gap-1.5 text-brand-charcoal/60 hover:text-stone-700 text-sm mb-6 transition-colors"
         >
           <ArrowLeft className="size-4" />
           লগইন পেজে ফিরে যান
         </Link>
 
-        <Card className="bg-white/80 backdrop-blur-xl border-stone-200/60 shadow-lg rounded-2xl">
+        <Card className="bg-white/80 backdrop-blur-xl border-[#C9A961]/30/60 shadow-lg rounded-2xl">
           <CardContent className="pt-6 pb-6 px-6">
             {/* Brand Logo */}
             <motion.div
@@ -101,7 +101,7 @@ export default function ForgotPasswordPage() {
                 <span className="text-white text-2xl font-bold" style={{ fontFamily: 'var(--font-inter)' }}>স্ব</span>
               </div>
               <h1 className="text-xl font-bold text-stone-900">পাসওয়ার্ড পুনরুদ্ধার</h1>
-              <p className="text-stone-500 text-sm mt-1 text-center">আপনার ইমেইল দিন, আমরা রিসেট লিংক পাঠাবো</p>
+              <p className="text-brand-charcoal/60 text-sm mt-1 text-center">আপনার ইমেইল দিন, আমরা রিসেট লিংক পাঠাবো</p>
             </motion.div>
 
             <AnimatePresence mode="wait">
@@ -142,7 +142,7 @@ export default function ForgotPasswordPage() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           autoComplete="off"
-                          className="h-12 rounded-xl border-stone-200 bg-white/60 pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
+                          className="h-12 rounded-xl border-[#C9A961]/30 bg-white/60 pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
                           disabled={loading}
                         />
                       </div>
@@ -157,7 +157,7 @@ export default function ForgotPasswordPage() {
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="w-full h-12 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-medium text-base shadow-md transition-all active:scale-[0.98]"
+                        className="w-full h-12 rounded-xl btn-lux font-medium text-base shadow-md transition-all active:scale-[0.98]"
                       >
                         {loading ? (
                           <>
@@ -185,7 +185,7 @@ export default function ForgotPasswordPage() {
                       <CheckCircle className="size-7 text-green-600" />
                     </div>
                     <h2 className="text-lg font-bold text-stone-900">রিসেট লিংক প্রস্তুত!</h2>
-                    <p className="text-stone-500 text-sm mt-1 text-center">
+                    <p className="text-brand-charcoal/60 text-sm mt-1 text-center">
                       নিচের লিংক দিয়ে আপনার পাসওয়ার্ড রিসেট করুন
                     </p>
                   </div>
@@ -198,15 +198,15 @@ export default function ForgotPasswordPage() {
                         <Input
                           readOnly
                           value={resetUrl}
-                          className="h-11 rounded-xl border-stone-200 bg-white/60 text-stone-700 text-sm font-mono"
+                          className="h-11 rounded-xl border-[#C9A961]/30 bg-white/60 text-stone-700 text-sm font-mono"
                         />
                         <Button
                           type="button"
                           variant="outline"
                           onClick={handleCopy}
-                          className="h-11 px-3 rounded-xl border-stone-200 hover:bg-stone-100 shrink-0"
+                          className="h-11 px-3 rounded-xl border-[#C9A961]/30 hover:bg-stone-100 shrink-0"
                         >
-                          <Copy className="size-4 text-stone-600" />
+                          <Copy className="size-4 text-brand-charcoal/70" />
                         </Button>
                       </div>
                       {copied && (
@@ -222,7 +222,7 @@ export default function ForgotPasswordPage() {
                         type="button"
                         variant="outline"
                         onClick={() => window.open(gmailUrl, '_blank')}
-                        className="w-full h-11 rounded-xl border-stone-200 bg-white hover:bg-stone-50 text-stone-700 font-medium transition-all"
+                        className="w-full h-11 rounded-xl border-[#C9A961]/30 bg-white hover:bg-brand-ivory text-stone-700 font-medium transition-all"
                       >
                         <ExternalLink className="size-4 mr-1.5" />
                         Gmail এ পাঠান
@@ -232,7 +232,7 @@ export default function ForgotPasswordPage() {
                       <Button
                         type="button"
                         onClick={() => window.location.href = resetUrl}
-                        className="w-full h-11 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-medium shadow-md transition-all active:scale-[0.98]"
+                        className="w-full h-11 rounded-xl btn-lux font-medium shadow-md transition-all active:scale-[0.98]"
                       >
                         রিসেট করুন
                       </Button>
@@ -245,7 +245,7 @@ export default function ForgotPasswordPage() {
             {/* Login Link */}
             {!success && (
               <div className="mt-5 text-center">
-                <p className="text-sm text-stone-500">
+                <p className="text-sm text-brand-charcoal/60">
                   মনে পড়ে গেছে?{' '}
                   <Link href="/login" className="text-stone-900 font-medium hover:underline">
                     লগইন করুন

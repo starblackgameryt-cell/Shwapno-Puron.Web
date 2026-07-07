@@ -152,7 +152,7 @@ export default function SignupPage() {
         <motion.div variants={fadeUp} custom={0}>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-stone-500 hover:text-stone-700 text-sm mb-8 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-brand-charcoal/60 hover:text-stone-700 text-sm mb-8 transition-colors group"
           >
             <ArrowLeft className="size-4 group-hover:-translate-x-0.5 transition-transform" />
             হোমে ফিরে যান
@@ -215,7 +215,7 @@ export default function SignupPage() {
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={googleLoading || loading}
-                className="w-full h-12 rounded-xl bg-white border border-stone-200/80 hover:border-stone-300 hover:shadow-md text-stone-700 font-medium text-sm flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-12 rounded-xl bg-white border border-[#C9A961]/30/80 hover:border-[#C9A961]/40 hover:shadow-md text-stone-700 font-medium text-sm flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {googleLoading ? (
                   <Loader2 className="size-5 animate-spin text-stone-400" />
@@ -241,7 +241,7 @@ export default function SignupPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name */}
               <motion.div variants={fadeUp} custom={1} className="space-y-2">
-                <Label htmlFor="name" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="name" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   আপনার নাম
                 </Label>
                 <div className="relative">
@@ -253,7 +253,7 @@ export default function SignupPage() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     autoComplete="off"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading}
                   />
                 </div>
@@ -261,7 +261,7 @@ export default function SignupPage() {
 
               {/* Email */}
               <motion.div variants={fadeUp} custom={2} className="space-y-2">
-                <Label htmlFor="email" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="email" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   Gmail ঠিকানা
                 </Label>
                 <div className="relative">
@@ -273,7 +273,7 @@ export default function SignupPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="off"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading}
                   />
                 </div>
@@ -282,7 +282,7 @@ export default function SignupPage() {
 
               {/* Password */}
               <motion.div variants={fadeUp} custom={3} className="space-y-2">
-                <Label htmlFor="password" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="password" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   পাসওয়ার্ড
                 </Label>
                 <div className="relative">
@@ -294,13 +294,13 @@ export default function SignupPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="new-password"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-brand-charcoal/70 transition-colors"
                     tabIndex={-1}
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -335,7 +335,7 @@ export default function SignupPage() {
 
               {/* Confirm Password */}
               <motion.div variants={fadeUp} custom={4} className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="confirmPassword" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   পাসওয়ার্ড নিশ্চিত করুন
                 </Label>
                 <div className="relative">
@@ -347,13 +347,13 @@ export default function SignupPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     autoComplete="new-password"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirm(!showConfirm)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-brand-charcoal/70 transition-colors"
                     tabIndex={-1}
                   >
                     {showConfirm ? <EyeOff className="size-4" /> : <Eye className="size-4" />}

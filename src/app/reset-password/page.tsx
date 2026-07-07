@@ -26,23 +26,23 @@ function ResetPasswordForm() {
   // No token in URL
   if (!token) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-stone-50 px-4 py-8">
+      <div className="min-h-screen flex items-center justify-center bg-brand-ivory px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="w-full max-w-sm"
         >
-          <Card className="bg-white/80 backdrop-blur-xl border-stone-200/60 shadow-lg rounded-2xl">
+          <Card className="bg-white/80 backdrop-blur-xl border-[#C9A961]/30/60 shadow-lg rounded-2xl">
             <CardContent className="pt-6 pb-6 px-6">
               <div className="flex flex-col items-center text-center">
                 <div className="w-14 h-14 rounded-full bg-red-50 border border-red-200 flex items-center justify-center mb-3">
                   <AlertCircle className="size-7 text-red-500" />
                 </div>
                 <h1 className="text-lg font-bold text-stone-900 mb-1">ত্রুটি</h1>
-                <p className="text-stone-500 text-sm mb-4">রিসেট টোকেন পাওয়া যায়নি</p>
+                <p className="text-brand-charcoal/60 text-sm mb-4">রিসেট টোকেন পাওয়া যায়নি</p>
                 <Link href="/forgot-password">
-                  <Button className="rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-medium shadow-md">
+                  <Button className="rounded-xl btn-lux font-medium shadow-md">
                     আবার চেষ্টা করুন
                   </Button>
                 </Link>
@@ -96,14 +96,14 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-stone-50 px-4 py-8">
+    <div className="min-h-screen flex items-center justify-center bg-brand-ivory px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className="w-full max-w-sm"
       >
-        <Card className="bg-white/80 backdrop-blur-xl border-stone-200/60 shadow-lg rounded-2xl">
+        <Card className="bg-white/80 backdrop-blur-xl border-[#C9A961]/30/60 shadow-lg rounded-2xl">
           <CardContent className="pt-6 pb-6 px-6">
             {/* Brand Logo */}
             <motion.div
@@ -116,7 +116,7 @@ function ResetPasswordForm() {
                 <span className="text-white text-2xl font-bold" style={{ fontFamily: 'var(--font-inter)' }}>স্ব</span>
               </div>
               <h1 className="text-xl font-bold text-stone-900">নতুন পাসওয়ার্ড সেট করুন</h1>
-              <p className="text-stone-500 text-sm mt-1">আপনার নতুন পাসওয়ার্ড দিন</p>
+              <p className="text-brand-charcoal/60 text-sm mt-1">আপনার নতুন পাসওয়ার্ড দিন</p>
             </motion.div>
 
             <AnimatePresence mode="wait">
@@ -156,13 +156,13 @@ function ResetPasswordForm() {
                           placeholder="ন্যূনতম ৬ অক্ষর"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="h-12 rounded-xl border-stone-200 bg-white/60 pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
+                          className="h-12 rounded-xl border-[#C9A961]/30 bg-white/60 pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
                           disabled={loading}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-brand-charcoal/70 transition-colors"
                           tabIndex={-1}
                         >
                           {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -186,13 +186,13 @@ function ResetPasswordForm() {
                           placeholder="পুনরায় পাসওয়ার্ড দিন"
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
-                          className="h-12 rounded-xl border-stone-200 bg-white/60 pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
+                          className="h-12 rounded-xl border-[#C9A961]/30 bg-white/60 pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50"
                           disabled={loading}
                         />
                         <button
                           type="button"
                           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-brand-charcoal/70 transition-colors"
                           tabIndex={-1}
                         >
                           {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -209,7 +209,7 @@ function ResetPasswordForm() {
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="w-full h-12 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-medium text-base shadow-md transition-all active:scale-[0.98]"
+                        className="w-full h-12 rounded-xl btn-lux font-medium text-base shadow-md transition-all active:scale-[0.98]"
                       >
                         {loading ? (
                           <>
@@ -235,11 +235,11 @@ function ResetPasswordForm() {
                     <CheckCircle className="size-7 text-green-600" />
                   </div>
                   <h2 className="text-lg font-bold text-stone-900 mb-1">পাসওয়ার্ড আপডেট হয়েছে!</h2>
-                  <p className="text-stone-500 text-sm mb-5">
+                  <p className="text-brand-charcoal/60 text-sm mb-5">
                     আপনার পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে
                   </p>
                   <Link href="/login" className="w-full">
-                    <Button className="w-full h-12 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-medium text-base shadow-md transition-all active:scale-[0.98]">
+                    <Button className="w-full h-12 rounded-xl btn-lux font-medium text-base shadow-md transition-all active:scale-[0.98]">
                       এখন লগইন করুন
                     </Button>
                   </Link>
@@ -257,7 +257,7 @@ export default function ResetPasswordPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-stone-50">
+        <div className="min-h-screen flex items-center justify-center bg-brand-ivory">
           <Loader2 className="size-6 animate-spin text-stone-400" />
         </div>
       }

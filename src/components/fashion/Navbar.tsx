@@ -87,7 +87,7 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-xl shadow-sm border-b border-stone-100' : 'bg-white'
+        scrolled ? 'bg-[#FAF7F0]/95 backdrop-blur-xl shadow-sm border-b border-[#C9A961]/30' : 'bg-[#FAF7F0]'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -117,8 +117,8 @@ export function Navbar() {
 
           {/* Center: Brand */}
           <button onClick={goHome} className="absolute left-1/2 -translate-x-1/2 text-center">
-            <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tight text-stone-900">স্বপ্ন পূরণ</span>
-            <span className="block text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-stone-400">Shwapno Puron</span>
+            <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tight text-brand-emerald font-display">স্বপ্ন পূরণ</span>
+            <span className="block text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.4em] uppercase text-brand-gold font-serif-lux">Shwapno Puron</span>
           </button>
 
           {/* Right: Nav + Actions */}
@@ -190,13 +190,13 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-              className="fixed left-0 top-0 h-full w-[280px] sm:w-[320px] bg-white z-[70] shadow-2xl flex flex-col lg:hidden"
+              className="fixed left-0 top-0 h-full w-[280px] sm:w-[320px] bg-[#FAF7F0] z-[70] shadow-2xl flex flex-col lg:hidden"
               style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
             >
               {/* Menu header */}
               <div className="p-5 sm:p-6 border-b border-stone-100 flex items-center justify-between">
                 <div>
-                  <span className="text-lg sm:text-xl font-black tracking-tight text-stone-900">স্বপ্ন পূরণ</span>
+                  <span className="text-lg sm:text-xl font-black tracking-tight text-brand-emerald font-display">স্বপ্ন পূরণ</span>
                   <span className="block text-[7px] sm:text-[8px] tracking-[0.3em] uppercase text-stone-400 mt-0.5">Shwapno Puron</span>
                 </div>
                 <button onClick={() => setMobileMenuOpen(false)} className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="মেনু বন্ধ">

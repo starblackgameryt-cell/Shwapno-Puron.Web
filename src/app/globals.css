@@ -7,7 +7,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-serif: var(--font-cormorant);
+  --font-display: var(--font-baloo);
   --font-mono: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -45,38 +46,65 @@
 }
 
 :root {
+  /* === Luxury Boutique Palette — "Jamdani & Zari" ===
+     Bottle Emerald (jamdani border green), Wine Maroon (bridal silk),
+     Antique Gold (zari thread), Champagne (light gold highlight),
+     Ivory Pearl (raw silk background), Deep Charcoal (warm text).
+     Hex values kept as RGB triples for easy compositing. */
   --radius: 0rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Backgrounds & surfaces */
+  --background: #FAF7F0;            /* Ivory Pearl */
+  --foreground: #1A1A1A;            /* Deep Charcoal */
+  --card: #FFFFFF;
+  --card-foreground: #1A1A1A;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1A1A;
+
+  /* Primary = Bottle Emerald (deep bottle-green) */
+  --primary: #0B3D2E;
+  --primary-foreground: #FAF7F0;    /* Ivory text on emerald */
+
+  /* Secondary = Wine Maroon */
+  --secondary: #5C1A2B;
+  --secondary-foreground: #FAF7F0;
+
+  /* Muted = soft ivory tones */
+  --muted: #F2EDE0;
+  --muted-foreground: #6B6256;
+
+  /* Accent = Antique Gold (zari) */
+  --accent: #C9A961;
+  --accent-foreground: #1A1A1A;
+
+  --destructive: #B91C1C;
+  --border: #E6DFD0;
+  --input: #E6DFD0;
+  --ring: #C9A961;                  /* Gold ring for focus */
+
+  /* Charts — jewel tones */
+  --chart-1: #0B3D2E;
+  --chart-2: #5C1A2B;
+  --chart-3: #C9A961;
+  --chart-4: #E8D5A8;
+  --chart-5: #6B6256;
+
+  --sidebar: #FAF7F0;
+  --sidebar-foreground: #1A1A1A;
+  --sidebar-primary: #0B3D2E;
+  --sidebar-primary-foreground: #FAF7F0;
+  --sidebar-accent: #F2EDE0;
+  --sidebar-accent-foreground: #0B3D2E;
+  --sidebar-border: #E6DFD0;
+  --sidebar-ring: #C9A961;
+
+  /* Brand tokens for direct use */
+  --brand-emerald: #0B3D2E;
+  --brand-maroon: #5C1A2B;
+  --brand-gold: #C9A961;
+  --brand-champagne: #E8D5A8;
+  --brand-ivory: #FAF7F0;
+  --brand-charcoal: #1A1A1A;
 }
 
 @layer base {
@@ -113,8 +141,8 @@
 
 /* Selection */
 ::selection {
-  background: oklch(0.9 0.02 80);
-  color: oklch(0.2 0 0);
+  background: #C9A961;
+  color: #0B3D2E;
 }
 
 /* Hide scrollbar utility */
@@ -124,6 +152,14 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* === Luxury scrollbar (gold on ivory) === */
+::-webkit-scrollbar-thumb {
+  background: #C9A961 !important;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0B3D2E !important;
 }
 
 /* Safe area bottom padding for sticky CTAs */
@@ -244,4 +280,189 @@ button, a {
 .no-select {
   -webkit-user-select: none;
   user-select: none;
+}
+
+
+/* ============================================
+   LUXURY BOUTIQUE THEME — "Jamdani & Zari"
+   ============================================ */
+
+/* Font utility classes */
+.font-display { font-family: var(--font-baloo), var(--font-inter), sans-serif; }
+.font-serif-lux { font-family: var(--font-cormorant), Georgia, serif; }
+
+/* Brand color utilities */
+.bg-brand-emerald { background-color: #0B3D2E; }
+.bg-brand-maroon { background-color: #5C1A2B; }
+.bg-brand-gold { background-color: #C9A961; }
+.bg-brand-champagne { background-color: #E8D5A8; }
+.bg-brand-ivory { background-color: #FAF7F0; }
+.text-brand-emerald { color: #0B3D2E; }
+.text-brand-maroon { color: #5C1A2B; }
+.text-brand-gold { color: #C9A961; }
+.text-brand-champagne { color: #E8D5A8; }
+.text-brand-ivory { color: #FAF7F0; }
+.text-brand-charcoal { color: #1A1A1A; }
+.border-brand-gold { border-color: #C9A961; }
+.border-brand-emerald { border-color: #0B3D2E; }
+.ring-brand-gold { box-shadow: 0 0 0 2px #C9A961; }
+
+/* Gold gradient text (for premium headings) */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A961 0%, #E8D5A8 50%, #C9A961 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Emerald gradient (for premium buttons/badges) */
+.bg-emerald-gradient {
+  background: linear-gradient(135deg, #0B3D2E 0%, #134D3A 100%);
+}
+
+/* === SIGNATURE ELEMENT: Zari Border Divider ===
+   A horizontal gold thread with a centered diamond motif,
+   inspired by embroidery border patterns. Used sparingly
+   between major homepage sections. */
+.zari-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 320px;
+}
+.zari-divider::before,
+.zari-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A961, transparent);
+}
+.zari-divider__dot {
+  width: 8px;
+  height: 8px;
+  background: #C9A961;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  position: relative;
+}
+.zari-divider__dot::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 1px solid #C9A961;
+  opacity: 0.4;
+}
+
+/* Zari underline — short gold accent beneath section headings */
+.zari-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+.zari-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C9A961, transparent);
+}
+.zari-underline--left::after {
+  left: 0;
+  transform: none;
+}
+
+/* Silk hover effect for product cards */
+.silk-hover {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.5s ease;
+}
+.silk-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(11, 61, 46, 0.18);
+  border-color: #C9A961;
+}
+
+/* Product image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.06);
+}
+
+/* Gold focus ring for inputs (luxury polish) */
+.input-lux:focus {
+  border-color: #C9A961;
+  box-shadow: 0 0 0 1px #C9A961;
+}
+
+/* Premium button — emerald with gold hover */
+.btn-lux {
+  background: #0B3D2E;
+  color: #FAF7F0;
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+}
+.btn-lux:hover {
+  background: #134D3A;
+  box-shadow: 0 8px 20px -6px rgba(11, 61, 46, 0.4);
+}
+
+/* Gold-bordered button (outline) */
+.btn-gold-outline {
+  background: transparent;
+  color: #0B3D2E;
+  border: 1px solid #C9A961;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.btn-gold-outline:hover {
+  background: #C9A961;
+  color: #1A1A1A;
+}
+
+/* Silk fade keyframes (used by hero staggered reveal) */
+@keyframes silkFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.silk-reveal {
+  opacity: 0;
+  animation: silkFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.silk-delay-1 { animation-delay: 0.15s; }
+.silk-delay-2 { animation-delay: 0.30s; }
+.silk-delay-3 { animation-delay: 0.45s; }
+.silk-delay-4 { animation-delay: 0.60s; }
+
+/* prefers-reduced-motion — disable all decorative motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .silk-reveal {
+    opacity: 1 !important;
+    animation: none !important;
+  }
 }

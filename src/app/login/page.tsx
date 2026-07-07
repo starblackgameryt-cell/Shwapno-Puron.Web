@@ -207,7 +207,7 @@ function LoginForm() {
         <motion.div variants={itemVariants} custom={0}>
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-stone-500 hover:text-stone-700 text-sm mb-8 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-brand-charcoal/60 hover:text-stone-700 text-sm mb-8 transition-colors group"
           >
             <ArrowLeft className="size-4 group-hover:-translate-x-0.5 transition-transform" />
             হোমে ফিরে যান
@@ -404,13 +404,13 @@ function LoginForm() {
                 type="button"
                 onClick={handleGoogleLogin}
                 disabled={googleLoading || loading || adminRedirecting}
-                className="w-full h-12 rounded-xl bg-white border-2 border-stone-200/80 hover:border-stone-300 hover:shadow-lg hover:shadow-stone-200/50 text-stone-700 font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
+                className="w-full h-12 rounded-xl bg-white border-2 border-[#C9A961]/30/80 hover:border-[#C9A961]/40 hover:shadow-lg hover:shadow-stone-200/50 text-stone-700 font-semibold text-sm flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
               >
                 {/* Subtle gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-stone-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {googleLoading ? (
-                  <Loader2 className="size-5 animate-spin text-stone-500" />
+                  <Loader2 className="size-5 animate-spin text-brand-charcoal/60" />
                 ) : (
                   <svg className="size-5 shrink-0" viewBox="0 0 24 24">
                     <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -439,7 +439,7 @@ function LoginForm() {
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Email */}
               <motion.div variants={fadeUp} custom={0} className="space-y-2">
-                <Label htmlFor="email" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="email" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   Gmail ঠিকানা
                 </Label>
                 <div className="relative">
@@ -451,7 +451,7 @@ function LoginForm() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     autoComplete="off"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-4 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading || adminRedirecting}
                   />
                 </div>
@@ -459,7 +459,7 @@ function LoginForm() {
 
               {/* Password */}
               <motion.div variants={fadeUp} custom={1} className="space-y-2">
-                <Label htmlFor="password" className="text-stone-600 text-xs font-semibold tracking-wide uppercase">
+                <Label htmlFor="password" className="text-brand-charcoal/70 text-xs font-semibold tracking-wide uppercase">
                   পাসওয়ার্ড
                 </Label>
                 <div className="relative">
@@ -471,13 +471,13 @@ function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="new-password"
-                    className="h-12 rounded-xl border-stone-200/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
+                    className="h-12 rounded-xl border-[#C9A961]/30/80 bg-white/60 backdrop-blur-sm pl-10 pr-11 text-stone-900 placeholder:text-stone-400 focus-visible:border-stone-400 focus-visible:ring-stone-200/50 transition-all duration-300"
                     disabled={loading || adminRedirecting}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 transition-colors"
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-brand-charcoal/70 transition-colors"
                     tabIndex={-1}
                   >
                     {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
