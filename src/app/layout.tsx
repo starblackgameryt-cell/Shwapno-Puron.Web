@@ -51,16 +51,30 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "bn_BD",
-    siteName: "স্বপ্ন পূরণ — Shwapno Puron",
+    siteName: "স্বপ্ন পূরণ ফ্যাশন",
   },
   verification: {
     google: "uh5v58YOgmC_0YBVgHeWcb7nosGizGk3A6qVvMKOIJo",
   },
 };
 
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "স্বপ্ন পূরণ ফ্যাশন",
+  "alternateName": "Shwapno Puron",
+  "url": SITE_URL,
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="bn" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        />
+      </head>
       <body className={`${inter.variable} ${cormorant.variable} ${balooDa2.variable} antialiased bg-background text-foreground overscroll-none`}>
         <AuthProvider>
           {children}
