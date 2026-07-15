@@ -82,7 +82,7 @@ ${notes ? `📝 বিশেষ নোট: ${notes}` : ''}
 
 export async function POST(request: Request) {
   try {
-    const { customerName, phone, address, products, totalAmount, paymentMethod, notes, paymentMethodId } = await request.json()
+    const { customerName, phone, address, products, totalAmount, paymentMethod, notes, paymentMethodId, customFields } = await request.json()
 
     if (!customerName || !phone || !address || !products) {
       return Response.json({ error: 'সকল তথ্য পূরণ করুন' }, { status: 400 })
@@ -97,6 +97,8 @@ export async function POST(request: Request) {
         totalAmount: totalAmount || 0,
         paymentMethod: paymentMethod || 'cod',
         notes: notes || '',
+        // Custom field responses stored as JSON string (backward compatible — defaults to '[]')
+        customFields: JSON.stringify(customFields || []),
       },
     })
 

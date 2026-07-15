@@ -1488,6 +1488,25 @@ function OrdersTab() {
                               </div>
                             )}
 
+                            {/* Custom Fields (admin-defined checkout fields) */}
+                            {(() => {
+                              try {
+                                const cf = JSON.parse((order as any).customFields || '[]')
+                                if (!Array.isArray(cf) || cf.length === 0) return null
+                                return (
+                                  <div className="bg-stone-50 rounded-lg p-3 space-y-1.5">
+                                    <p className="text-xs font-semibold text-stone-700 mb-1">কাস্টম ফিল্ড</p>
+                                    {cf.map((item: { label: string; value: string }, i: number) => (
+                                      <div key={i} className="flex justify-between gap-2 text-xs">
+                                        <span className="text-stone-500">{item.label}:</span>
+                                        <span className="text-stone-900 font-medium text-right">{item.value || '—'}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )
+                              } catch { return null }
+                            })()}
+
                             {/* Status Actions */}
                             <div className="flex flex-wrap gap-2">
                               {nextStatuses.map((status) => (
@@ -2024,6 +2043,13 @@ function ContentTab({ onToast }: { onToast: (msg: string) => void }) {
         <p className="text-stone-500 text-sm">হোমপেজের টেক্সট ও তথ্য সম্পাদনা করুন</p>
       </div>
 
+      <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
+        <Lock className="size-4 text-amber-600 mt-0.5 flex-shrink-0" />
+        <div className="text-[11px] text-amber-800 leading-relaxed">
+          <strong>সুরক্ষিত ফিল্ড:</strong> "নাম", "ফোন নম্বর", "সম্পূর্ণ ঠিকানা" প্লেসহোল্ডার গুলো সম্পাদনা করা যায় কিন্তু মুছে ফেলা যায় না — এগুলো অর্ডার ডেলিভারির জন্য আবশ্যক। খালি করলে লাইভ সাইটে ডিফল্ট টেক্সট লুকিয়ে যাবে।
+        </div>
+      </div>
+
       {sections.map((section) => (
         <Card key={section.id} className="border-stone-100 shadow-sm overflow-hidden">
           <button
@@ -2041,9 +2067,30 @@ function ContentTab({ onToast }: { onToast: (msg: string) => void }) {
           {expandedSections[section.id] && (
             <CardContent className="px-4 pb-4 pt-0 space-y-3 border-t border-stone-100">
               <div className="pt-3" />
-              {section.fields.map((field) => (
+              {section.fields.map((field) => {
+                const isProtected = ['order_name_placeholder', 'order_phone_placeholder', 'order_address_placeholder'].includes(field.key)
+                return (
                 <div key={field.key} className="space-y-1.5">
-                  <Label className="text-xs font-medium text-stone-600">{field.label}</Label>
+                  <div className="flex items-center justify-between gap-2">
+                    <Label className="text-xs font-medium text-stone-600 flex items-center gap-1.5">
+                      {field.label}
+                      {isProtected && (
+                        <span className="inline-flex items-center gap-0.5 text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          <Lock className="size-2.5" /> সুরক্ষিত
+                        </span>
+                      )}
+                    </Label>
+                    {field.type !== 'image' && (
+                      <button
+                        type="button"
+                        onClick={() => setContent({ ...content, [field.key]: '' })}
+                        className="text-[9px] text-stone-400 hover:text-red-500 transition-colors flex items-center gap-0.5"
+                        title="খালি করুন (ডিফল্ট টেক্সট লুকাবে)"
+                      >
+                        ✕ খালি করুন
+                      </button>
+                    )}
+                  </div>
                   {field.type === 'image' ? (
                     <ImageUploadField
                       value={content[field.key] || ''}
@@ -2052,24 +2099,27 @@ function ContentTab({ onToast }: { onToast: (msg: string) => void }) {
                     />
                   ) : textareaFields.has(field.key) ? (
                     <Textarea
-                      value={content[field.key] || ''}
+                      value={content[field.key] ?? ''}
                       onChange={(e) => setContent({ ...content, [field.key]: e.target.value })}
                       className="bg-stone-50/50 min-h-20"
                       rows={3}
                     />
                   ) : (
                     <Input
-                      value={content[field.key] || ''}
+                      value={content[field.key] ?? ''}
                       onChange={(e) => setContent({ ...content, [field.key]: e.target.value })}
                       className="h-10 bg-stone-50/50"
                     />
                   )}
                 </div>
-              ))}
+                )
+              })}
             </CardContent>
           )}
         </Card>
       ))}
+
+      <CustomFieldsManager onToast={onToast} />
 
       <Button
         onClick={handleSave}
@@ -2083,6 +2133,168 @@ function ContentTab({ onToast }: { onToast: (msg: string) => void }) {
         )}
       </Button>
     </motion.div>
+  )
+}
+
+// ============ Custom Fields Manager (Checkout) ============
+interface CustomField {
+  id: string
+  label: string
+  placeholder: string
+  required: boolean
+  isActive: boolean
+  position: number
+}
+
+function CustomFieldsManager({ onToast }: { onToast: (msg: string) => void }) {
+  const [fields, setFields] = useState<CustomField[]>([])
+  const [loading, setLoading] = useState(true)
+  const [newLabel, setNewLabel] = useState('')
+  const [newPlaceholder, setNewPlaceholder] = useState('')
+  const [adding, setAdding] = useState(false)
+
+  const fetchFields = useCallback(async () => {
+    try {
+      const res = await fetch('/api/admin/checkout-custom-fields')
+      const data = await res.json()
+      if (Array.isArray(data)) setFields(data)
+    } catch (e) {
+      console.error('Custom fields fetch error:', e)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchFields()
+  }, [fetchFields])
+
+  const handleAdd = async () => {
+    if (!newLabel.trim()) return
+    setAdding(true)
+    try {
+      const res = await fetch('/api/admin/checkout-custom-fields', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ label: newLabel, placeholder: newPlaceholder, isActive: true }),
+      })
+      if (res.ok) {
+        setNewLabel('')
+        setNewPlaceholder('')
+        await fetchFields()
+        onToast('নতুন ফিল্ড যোগ হয়েছে')
+      } else {
+        onToast('যোগ করতে সমস্যা হয়েছে')
+      }
+    } catch {
+      onToast('নেটওয়ার্ক সমস্যা')
+    } finally {
+      setAdding(false)
+    }
+  }
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`/api/admin/checkout-custom-fields/${id}`, { method: 'DELETE' })
+      if (res.ok) {
+        await fetchFields()
+        onToast('ফিল্ড মুছে ফেলা হয়েছে')
+      }
+    } catch {
+      onToast('মুছতে সমস্যা হয়েছে')
+    }
+  }
+
+  const handleToggleActive = async (field: CustomField) => {
+    try {
+      await fetch(`/api/admin/checkout-custom-fields/${field.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isActive: !field.isActive }),
+      })
+      await fetchFields()
+    } catch {
+      onToast('আপডেট করতে সমস্যা')
+    }
+  }
+
+  return (
+    <Card className="border-stone-100 shadow-sm">
+      <CardContent className="p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <FileText className="size-4 text-stone-500" />
+          <h3 className="text-sm font-semibold text-stone-900">কাস্টম ফিল্ড (চেকআউট)</h3>
+        </div>
+        <p className="text-[11px] text-stone-500 leading-relaxed">
+          চেকআউট ফর্মে নতুন ঐচ্ছিক ফিল্ড যোগ করুন (যেমন: পছন্দের রং, ডেলিভারি সময়)। "নাম", "ফোন", "ঠিকানা" এই ৩টি মূল ফিল্ড সবসময় থাকবে এবং মুছা যাবে না।
+        </p>
+
+        {loading ? (
+          <div className="flex justify-center py-4">
+            <Loader2 className="size-5 animate-spin text-stone-400" />
+          </div>
+        ) : fields.length === 0 ? (
+          <p className="text-[11px] text-stone-400 text-center py-3">এখনো কোনো কাস্টম ফিল্ড নেই</p>
+        ) : (
+          <div className="space-y-2">
+            {fields.map((field) => (
+              <div key={field.id} className="flex items-center gap-2 p-2 bg-stone-50/50 rounded-md border border-stone-100">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-stone-900 truncate">{field.label}</p>
+                  {field.placeholder && <p className="text-[10px] text-stone-400 truncate">{field.placeholder}</p>}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleToggleActive(field)}
+                  className={`text-[9px] px-2 py-1 rounded transition-colors ${field.isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-stone-200 text-stone-500'}`}
+                  title={field.isActive ? 'নিষ্ক্রিয় করুন' : 'সক্রিয় করুন'}
+                >
+                  {field.isActive ? 'সক্রিয়' : 'নিষ্ক্রিয়'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(field.id)}
+                  className="p-1.5 text-stone-400 hover:text-red-500 transition-colors min-w-[32px] min-h-[32px] flex items-center justify-center"
+                  title="মুছে ফেলুন"
+                >
+                  <Trash2 className="size-3.5" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Add new field */}
+        <div className="pt-2 border-t border-stone-100 space-y-2">
+          <div className="flex items-center gap-2">
+            <Plus className="size-3.5 text-stone-400" />
+            <span className="text-[11px] font-medium text-stone-600">নতুন ফিল্ড যোগ করুন</span>
+          </div>
+          <Input
+            type="text"
+            value={newLabel}
+            onChange={(e) => setNewLabel(e.target.value)}
+            placeholder="ফিল্ডের লেবেল (যেমন: পছন্দের রং)"
+            className="h-9 text-xs bg-stone-50/50"
+          />
+          <Input
+            type="text"
+            value={newPlaceholder}
+            onChange={(e) => setNewPlaceholder(e.target.value)}
+            placeholder="প্লেসহোল্ডার (ঐচ্ছিক)"
+            className="h-9 text-xs bg-stone-50/50"
+          />
+          <Button
+            type="button"
+            onClick={handleAdd}
+            disabled={!newLabel.trim() || adding}
+            className="w-full h-9 text-xs bg-stone-900 hover:bg-stone-800 text-white"
+          >
+            {adding ? <Loader2 className="size-3.5 animate-spin" /> : '+ নতুন ফিল্ড যোগ করুন'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

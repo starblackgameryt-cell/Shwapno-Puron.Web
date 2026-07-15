@@ -89,20 +89,28 @@ export function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false)
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethodData[]>([])
   const [contactMethods, setContactMethods] = useState<ContactMethodData[]>([])
+  // Custom checkout fields (admin-defined) — empty array = backward compatible
+  const [customFields, setCustomFields] = useState<Array<{ id: string; label: string; placeholder: string; required: boolean }>>([])
+  const [customFieldValues, setCustomFieldValues] = useState<Record<string, string>>({})
 
   const total = list.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const notificationEmail = get('order_notification_email') || 'dolamaanha@gmail.com'
+  const notificationEmail = get('order_notification_email', 'dolamaanha@gmail.com')
 
   // Fetch payment methods and contact methods
   useEffect(() => {
     fetch('/api/payment-methods').then(r => r.json()).then(setPaymentMethods).catch(() => {})
     fetch('/api/contact-methods').then(r => r.json()).then(setContactMethods).catch(() => {})
+    fetch('/api/checkout-custom-fields').then(r => r.json()).then((data) => { if (Array.isArray(data)) setCustomFields(data) }).catch(() => {})
   }, [])
 
   const selectedPayment = paymentMethods.find(m => m.id === selectedPaymentId)
 
   const handleSubmit = async () => {
     if (!customerName || !phone || !address || !selectedPaymentId) return
+    // Validate required custom fields
+    for (const f of customFields) {
+      if (f.required && !customFieldValues[f.id]?.trim()) return
+    }
 
     setSubmitting(true)
     try {
@@ -115,6 +123,9 @@ export function CheckoutPage() {
           totalAmount: total,
           paymentMethod: selectedPayment?.name || 'unknown',
           paymentMethodId: selectedPaymentId,
+          customFields: customFields.length > 0
+            ? customFields.map((f) => ({ label: f.label, value: customFieldValues[f.id] || '' }))
+            : [],
         }),
       })
       const data = await res.json()
@@ -138,20 +149,20 @@ export function CheckoutPage() {
             <Check className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-600" />
           </motion.div>
           <h1 className="text-xl sm:text-2xl font-black text-stone-900 uppercase tracking-tight">
-            {get('order_success_title') || 'অর্ডার সফল হয়েছে!'}
+            {get('order_success_title', 'অর্ডার সফল হয়েছে!')}
           </h1>
           <p className="mt-3 sm:mt-4 text-stone-500 text-sm">
-            {get('order_success_message') || 'আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।'}
+            {get('order_success_message', 'আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।')}
           </p>
 
           {/* Payment instruction for selected payment method */}
           {selectedPayment && (
             <div className="mt-6 p-4 sm:p-5 bg-amber-50 border border-amber-200 text-left">
               <p className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
-                💳 {get('order_confirm_title') || 'পেমেন্ট নিশ্চিত করুন'}
+                💳 {get('order_confirm_title', 'পেমেন্ট নিশ্চিত করুন')}
               </p>
               <p className="text-[10px] sm:text-xs text-amber-700 mb-3">
-                {get('order_payment_instruction_after') || 'নিচের নম্বরে পেমেন্ট করুন এবং পেমেন্টের স্ক্রিনশট নিচের যোগাযোগে পাঠান:'}
+                {get('order_payment_instruction_after', 'নিচের নম্বরে পেমেন্ট করুন এবং পেমেন্টের স্ক্রিনশট নিচের যোগাযোগে পাঠান:')}
               </p>
               <div className="flex items-center justify-between bg-white p-3 border border-amber-200">
                 <div>
@@ -168,10 +179,10 @@ export function CheckoutPage() {
           {contactMethods.length > 0 && (
             <div className="mt-4 p-4 sm:p-5 bg-brand-ivory border border-[#C9A961]/30 text-left">
               <p className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase tracking-wider mb-2">
-                📱 {get('order_contact_title') || 'যোগাযোগ করুন'}
+                📱 {get('order_contact_title', 'যোগাযোগ করুন')}
               </p>
               <p className="text-[10px] sm:text-xs text-stone-500 mb-3">
-                {get('order_contact_instruction') || 'পেমেন্ট করার পর অর্ডার কনফার্ম করতে নিচের যোগাযোগে আপনার পেমেন্টের স্ক্রিনশট পাঠান।'}
+                {get('order_contact_instruction', 'পেমেন্ট করার পর অর্ডার কনফার্ম করতে নিচের যোগাযোগে আপনার পেমেন্টের স্ক্রিনশট পাঠান।')}
               </p>
               <div className="space-y-2">
                 {contactMethods.map((method) => (
@@ -197,7 +208,7 @@ export function CheckoutPage() {
           )}
 
           <Button onClick={goHome} className="w-full mt-4 sm:mt-6 btn-lux py-3 sm:py-4 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase min-h-[44px]">
-            {get('order_home_button') || 'হোমে ফিরে যান'}
+            {get('order_home_button', 'হোমে ফিরে যান')}
           </Button>
         </div>
       </FadeIn>
@@ -213,14 +224,14 @@ export function CheckoutPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <button onClick={goHome} className="flex items-center gap-2 text-brand-charcoal/60 hover:text-brand-emerald transition-colors mb-4 sm:mb-8 group min-h-[44px]">
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-[11px] tracking-[0.2em] uppercase font-medium">{get('order_back_button') || 'ফিরে যান'}</span>
+          <span className="text-[11px] tracking-[0.2em] uppercase font-medium">{get('order_back_button', 'ফিরে যান')}</span>
         </button>
 
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-stone-900 tracking-tight uppercase">
-          {get('order_title') || 'অর্ডার করুন'}
+          {get('order_title', 'অর্ডার করুন')}
         </h1>
         <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-brand-charcoal/60">
-          {get('order_subtitle') || `অর্ডার করলে স্বয়ংক্রিয়ভাবে আমাদের Gmail (${notificationEmail}) এ নোটিফিকেশন যাবে`}
+          {get('order_subtitle', `অর্ডার করলে স্বয়ংক্রিয়ভাবে আমাদের Gmail (${notificationEmail}) এ নোটিফিকেশন যাবে`)}
         </p>
 
         <div className="mt-6 sm:mt-8 grid lg:grid-cols-5 gap-6 sm:gap-10">
@@ -229,29 +240,38 @@ export function CheckoutPage() {
             {/* Customer Info */}
             <div className="space-y-3 sm:space-y-4">
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-charcoal">
-                {get('order_info_title') || 'আপনার তথ্য'}
+                {get('order_info_title', 'আপনার তথ্য')}
               </h2>
-              <Input placeholder={get('order_name_placeholder') || 'আপনার নাম'} value={customerName} onChange={(e) => setCustomerName(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
-              <Input placeholder={get('order_phone_placeholder') || 'ফোন নম্বর'} value={phone} onChange={(e) => setPhone(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
-              <Input placeholder={get('order_address_placeholder') || 'সম্পূর্ণ ঠিকানা'} value={address} onChange={(e) => setAddress(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
-              <Input placeholder={get('order_notes_placeholder') || 'বিশেষ নোট (ঐচ্ছিক)'} value={notes} onChange={(e) => setNotes(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
+              <Input placeholder={get('order_name_placeholder', 'আপনার নাম')} value={customerName} onChange={(e) => setCustomerName(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
+              <Input placeholder={get('order_phone_placeholder', 'ফোন নম্বর')} value={phone} onChange={(e) => setPhone(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
+              <Input placeholder={get('order_address_placeholder', 'সম্পূর্ণ ঠিকানা')} value={address} onChange={(e) => setAddress(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
+              <Input placeholder={get('order_notes_placeholder', 'বিশেষ নোট (ঐচ্ছিক)')} value={notes} onChange={(e) => setNotes(e.target.value)} className="rounded-none py-4 sm:py-5 text-sm" />
+            {customFields.map((field) => (
+              <Input
+                key={field.id}
+                placeholder={field.placeholder || field.label}
+                value={customFieldValues[field.id] || ''}
+                onChange={(e) => setCustomFieldValues((prev) => ({ ...prev, [field.id]: e.target.value }))}
+                className="rounded-none py-4 sm:py-5 text-sm"
+              />
+            ))}
             </div>
 
             {/* Payment Methods - Dynamic */}
             <div className="space-y-3 sm:space-y-4">
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-brand-charcoal">
-                {get('order_payment_title') || 'পেমেন্ট পদ্ধতি'}
+                {get('order_payment_title', 'পেমেন্ট পদ্ধতি')}
               </h2>
 
               {!selectedPaymentId && paymentMethods.length > 0 && (
                 <p className="text-[10px] sm:text-xs text-stone-400">
-                  {get('order_payment_instruction_before') || 'পেমেন্ট পদ্ধতি নির্বাচন করুন'}
+                  {get('order_payment_instruction_before', 'পেমেন্ট পদ্ধতি নির্বাচন করুন')}
                 </p>
               )}
 
               {paymentMethods.length === 0 && (
                 <div className="p-4 bg-brand-ivory border border-[#C9A961]/30 text-center">
-                  <p className="text-xs text-stone-400">{get('order_no_payment_text') || 'কোনো পেমেন্ট পদ্ধতি যোগ করা হয়নি। অ্যাডমিন প্যানেল থেকে পেমেন্ট পদ্ধতি যোগ করুন।'}</p>
+                  <p className="text-xs text-stone-400">{get('order_no_payment_text', 'কোনো পেমেন্ট পদ্ধতি যোগ করা হয়নি। অ্যাডমিন প্যানেল থেকে পেমেন্ট পদ্ধতি যোগ করুন।')}</p>
                 </div>
               )}
 
@@ -301,7 +321,7 @@ export function CheckoutPage() {
           <div className="lg:col-span-2 border-t lg:border-t-0 lg:border-l border-[#C9A961]/30 pt-6 lg:pt-0">
             <div className="bg-brand-ivory p-4 sm:p-6 sticky top-20 sm:top-28">
               <h2 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-stone-900 mb-3 sm:mb-4">
-                {get('order_summary_title') || 'অর্ডার সারাংশ'}
+                {get('order_summary_title', 'অর্ডার সারাংশ')}
               </h2>
               <div className="space-y-2 sm:space-y-3 max-h-48 sm:max-h-60 overflow-y-auto">
                 {list.map((item) => (
@@ -314,9 +334,9 @@ export function CheckoutPage() {
                   </div>
                 ))}
               </div>
-              {list.length === 0 && <p className="text-[10px] sm:text-xs text-stone-400">{get('order_empty_cart_text') || 'তালিকায় কোনো পোশাক নেই'}</p>}
+              {list.length === 0 && <p className="text-[10px] sm:text-xs text-stone-400">{get('order_empty_cart_text', 'তালিকায় কোনো পোশাক নেই')}</p>}
               <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#C9A961]/30 flex justify-between">
-                <span className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase">{get('order_total_label') || 'মোট'}</span>
+                <span className="text-[10px] sm:text-xs font-bold text-stone-900 uppercase">{get('order_total_label', 'মোট')}</span>
                 <span className="text-base sm:text-lg font-black text-brand-charcoal">৳{total.toLocaleString()}</span>
               </div>
 
@@ -324,7 +344,7 @@ export function CheckoutPage() {
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <span className="text-sm">📧</span>
                   <p className="text-[9px] sm:text-[10px] text-red-700 font-medium">
-                    {get('order_notification_text') || `অর্ডার কনফার্ম হলে ${notificationEmail} এ স্বয়ংক্রিয় নোটিফিকেশন যাবে`}
+                    {get('order_notification_text', `অর্ডার কনফার্ম হলে ${notificationEmail} এ স্বয়ংক্রিয় নোটিফিকেশন যাবে`)}
                   </p>
                 </div>
               </div>
@@ -334,7 +354,7 @@ export function CheckoutPage() {
                 disabled={!customerName || !phone || !address || !selectedPaymentId || list.length === 0 || submitting}
                 className="w-full mt-4 sm:mt-6 btn-lux py-4 sm:py-6 rounded-none text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] uppercase disabled:opacity-40 disabled:cursor-not-allowed min-h-[44px]"
               >
-                {submitting ? (get('order_processing_text') || 'প্রসেসিং...') : (get('order_button_text') || 'অর্ডার নিশ্চিত করুন')}
+                {submitting ? (get('order_processing_text', 'প্রসেসিং...')) : (get('order_button_text', 'অর্ডার নিশ্চিত করুন'))}
               </Button>
             </div>
           </div>
