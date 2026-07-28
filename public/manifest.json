@@ -1,0 +1,19 @@
+{
+  "name": "স্বপ্ন পূরণ ফ্যাশন",
+  "short_name": "স্বপ্ন পূরণ",
+  "description": "ঐতিহ্যবাহী কারুশিল্পের সাথে আধুনিক ফ্যাশনের মেলবন্ধন। প্রিমিয়াম সালোয়ার কামিজ, শাড়ি ও লেহেঙ্গা।",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F0",
+  "theme_color": "#0B3D2E",
+  "lang": "bn",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

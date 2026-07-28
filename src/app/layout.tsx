@@ -47,7 +47,14 @@ export const metadata: Metadata = {
     "ঐতিহ্যবাহী কারুশিল্পের সাথে আধুনিক ফ্যাশনের মেলবন্ধন। প্রিমিয়াম সালোয়ার কামিজ, শাড়ি ও লেহেঙ্গা।",
   keywords: ["স্বপ্ন পূরণ", "ফ্যাশন", "সালোয়ার কামিজ", "শাড়ি", "লেহেঙ্গা", "বাংলাদেশি ফ্যাশন"],
   authors: [{ name: "স্বপ্ন পূরণ" }],
-  icons: { icon: "/logo.svg" },
+  applicationName: "স্বপ্ন পূরণ ফ্যাশন",
+  manifest: "/manifest.json",
+  icons: { icon: "/logo.svg", apple: "/logo.svg" },
+  appleWebApp: {
+    title: "স্বপ্ন পূরণ ফ্যাশন",
+    statusBarStyle: "default",
+    capable: true,
+  },
   openGraph: {
     type: "website",
     locale: "bn_BD",
@@ -64,6 +71,10 @@ const ORGANIZATION_JSON_LD = {
   "name": "স্বপ্ন পূরণ ফ্যাশন",
   "alternateName": "Shwapno Puron",
   "url": SITE_URL,
+  "logo": `${SITE_URL}/logo.svg`,
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=100095208882295",
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
